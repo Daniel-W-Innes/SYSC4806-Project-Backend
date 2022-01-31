@@ -13,4 +13,3 @@ deploy:
   app: secret-taiga-42817
   on:
     repo: Daniel-W-Innes/SYSC4806-Project
-  skip_cleanup: 'true'
