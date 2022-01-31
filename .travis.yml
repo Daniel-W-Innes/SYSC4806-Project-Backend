@@ -1,8 +1,16 @@
 language: java
 jdk:
-  - openjdk17
+- openjdk17
 before_install:
-  - chmod +x mvnw
+- chmod +x mvnw
 branches:
   only:
-    - master
+  - master
+deploy:
+  provider: heroku
+  api_key:
+    secure: bSMPXFQ9e0/Abt8P6tUAozClxbAEpW5W2zP/NfzdoM6wS7UBtnQ/gdY2CaSWKLV3hP1gOEEoVD6sLciLFCc4/VbFnPqlDkizlswRMq/WWqzR3d/JW04Incd0dhWbm9w/p48V6APwMJZnZ1D20CTNJJHAtDXaG1T44iZQswS7yOemrdDqdKzEOMdXHbwNl02isWKEnHgeUrkRevcFq4Uc5quvjbdC+ozwPPxnjifRczWbGl4FbgRhrtFUlwcNqgBtTKq3TDUkxvdjlPEzjBEBd74EKaI0fSbp4f3CNqMRET+LYA8uJ6dDdQl2yKleJKOKm6x3N0MKUaLhiygiE32E8dYaEEA/oNZpeHvrxV9Baq7+5guLIBmLSi+WaMqUrziiKYP1CvtX5US8gmng8jbGJ4/UkHXQ0jSIV6rhMnaIvSXgD2bPCnDJju0IR2A8fFGXxi70B5LJng/hWa4aeqNhLn97fu3kZurB8Mz7lWA2+V6t6g1uLSaKizQngcb/vLtmk1Ylqx96Rfd6I4Fq9kcJL4/QpyHxZTA31ksm2qdXElgNSznCIyn5y/pFtUd3ZXNg6e53wXFtdFBtHPbdP9rricyHBLBkOpZlzhI6ixbptBTfIBzixVO0mC+m5IKhy9u4mC2+ddsD4N8u8FWlKd0bfqfspidcQ02VGv7b1CSpkF0=
+  app: secret-taiga-42817
+  on:
+    repo: Daniel-W-Innes/SYSC4806-Project
+  skip_cleanup: 'true'
