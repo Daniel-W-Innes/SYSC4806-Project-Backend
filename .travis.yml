@@ -1,11 +1,11 @@
 language: java
 jdk:
-- openjdk17
+  - openjdk11
 before_install:
-- chmod +x mvnw
+  - chmod +x mvnw
 branches:
   only:
-  - master
+    - master
 before_deploy:
   - rvm $(travis_internal_ruby) --fuzzy do ruby -S gem install faraday -v 1.8.0
 deploy:
