@@ -14,12 +14,7 @@
     <artifactId>SYSC4806-Project</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>SYSC4806-Project</name>
-    <description>Mini-SurveyMonkey</description>
-
-    <properties>
-        <java.version>17</java.version>
-    </properties>
-
+    <description>SYSC4806-Project</description>
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
