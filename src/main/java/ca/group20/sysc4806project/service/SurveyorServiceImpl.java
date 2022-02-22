@@ -1,5 +1,7 @@
 package ca.group20.sysc4806project.service;
 
+import ca.group20.sysc4806project.model.Surveyor;
+import ca.group20.sysc4806project.repository.SurveyorRepo;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -12,4 +14,18 @@ import javax.transaction.Transactional;
 @Slf4j
 public class SurveyorServiceImpl implements SurveyorService {
 
+    private final SurveyorRepo surveyorRepo;
+
+    @Override
+    public Surveyor saveSurveyor(Surveyor surveyor) {
+        Surveyor newSurveyor = surveyorRepo.save(surveyor);
+        log.info(surveyor.getName() + " has been saved");
+        return newSurveyor;
+    }
+
+    @Override
+    public Surveyor getSurveyor(String surveyorName) {
+        log.info("Fetching Surveyor " + surveyorName);
+        return surveyorRepo.findByName(surveyorName);
+    }
 }
