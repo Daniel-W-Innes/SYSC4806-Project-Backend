@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface SurveyorRepo extends JpaRepository<Surveyor, Long> {
-    Surveyor findByUsername(String username);
+    Surveyor findByName(String surveyorName);
 }
