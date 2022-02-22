@@ -26,6 +26,6 @@ public class SurveyorServiceImpl implements SurveyorService {
     @Override
     public Surveyor getSurveyor(String surveyorName) {
         log.info("Fetching Surveyor " + surveyorName);
-        return surveyorRepo.findByUsername(surveyorName);
+        return surveyorRepo.findByName(surveyorName);
     }
 }

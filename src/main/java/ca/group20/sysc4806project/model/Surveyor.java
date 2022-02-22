@@ -8,7 +8,6 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class Surveyor {
