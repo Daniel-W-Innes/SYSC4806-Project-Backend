@@ -10,7 +10,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
-    <groupId>com.example</groupId>
+    <groupId>ca.group20</groupId>
     <artifactId>SYSC4806-Project</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>SYSC4806-Project</name>
@@ -34,7 +34,7 @@
         <dependency>
             <groupId>com.auth0</groupId>
             <artifactId>java-jwt</artifactId>
-            <version>3.18.2</version>
+            <version>3.18.3</version>
         </dependency>
 
         <dependency>

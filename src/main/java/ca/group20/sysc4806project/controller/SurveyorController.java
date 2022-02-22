@@ -1,6 +1,6 @@
-package com.example.sysc4806project.controller;
+package ca.group20.sysc4806project.controller;
 
-import com.example.sysc4806project.service.SurveyorService;
+import ca.group20.sysc4806project.service.SurveyorService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.RequestMapping;

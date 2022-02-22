@@ -1,4 +1,4 @@
-package com.example.sysc4806project.model;
+package ca.group20.sysc4806project.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

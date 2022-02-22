@@ -1,4 +1,4 @@
-package com.example.sysc4806project.service;
+package ca.group20.sysc4806project.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

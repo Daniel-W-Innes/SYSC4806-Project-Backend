@@ -1,6 +1,6 @@
-package com.example.sysc4806project.repository;
+package ca.group20.sysc4806project.repository;
 
-import com.example.sysc4806project.model.Surveyor;
+import ca.group20.sysc4806project.model.Surveyor;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
