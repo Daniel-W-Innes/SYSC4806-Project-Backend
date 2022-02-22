@@ -1,4 +1,4 @@
-package com.example.sysc4806project;
+package ca.group20.sysc4806project;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
