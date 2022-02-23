@@ -14,9 +14,10 @@ import javax.transaction.Transactional;
 public class SurveyServiceImpl implements SurveyService {
 
     private final SurveyRepo surveyRepo;
+
     @Override
     public Survey saveSurvey(Survey survey) {
-        Survey newSurvey = surveyRepo.save(surveyor);
+        Survey newSurvey = surveyRepo.save(survey);
         log.info(survey.getName() + " has been saved");
         return newSurvey;
     }
