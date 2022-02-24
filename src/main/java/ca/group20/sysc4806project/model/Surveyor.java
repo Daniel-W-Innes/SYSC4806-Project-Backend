@@ -6,14 +6,27 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-public class Surveyor {
+public class Surveyor extends User {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @NotNull
-    private Long id;
+    private List<Survey> surveys;
+
+    public Surveyor(String username, String firstName, String lastName, String password) {
+        super(username, firstName, lastName, password);
+
+        this.surveys = new ArrayList<Survey>();
+    }
+
+    public void addSurvey(Survey s) {
+        this.surveys.add(s);
+    }
+
+    public List<Survey> getSurveys() {
+        return this.surveys;
+    }
 }
