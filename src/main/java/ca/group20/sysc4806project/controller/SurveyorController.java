@@ -1,7 +1,7 @@
 package ca.group20.sysc4806project.controller;
 
-import ca.group20.sysc4806project.model.Surveyor;
 import ca.group20.sysc4806project.model.Survey;
+import ca.group20.sysc4806project.model.Surveyor;
 import ca.group20.sysc4806project.service.SurveyService;
 import ca.group20.sysc4806project.service.SurveyorService;
 import lombok.RequiredArgsConstructor;
