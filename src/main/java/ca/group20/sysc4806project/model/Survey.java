@@ -3,10 +3,7 @@ package ca.group20.sysc4806project.model;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,19 +16,31 @@ public class Survey {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @NotNull
+    @Column(name="surveyID")
     private Long id;
 
+    @JoinColumn(name="surveyorID")
+    @ManyToOne(targetEntity = Surveyor.class)
+    private Long ownerID;
+
     private String name;
+
+    @OneToMany(targetEntity=Question.class, mappedBy="surveyID")
     private List<Question> questions;
 
-    public Survey(String name) {
+    public Survey(Long ownerID, String name) {
         this.name = name;
+        this.ownerID = ownerID;
         this.questions = new ArrayList<Question>();
     }
+
+    public Long getID() { return this.id; }
 
     public String getName() {
         return this.name;
     }
+
+    public Long getOwnerID() { return this.ownerID; }
 
     public void setName(String n) {
         this.name = n;

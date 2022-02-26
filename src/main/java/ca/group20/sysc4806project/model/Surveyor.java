@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
+@Table(name="surveyor")
 @NoArgsConstructor
 @AllArgsConstructor
 public class Surveyor {
@@ -16,22 +17,28 @@ public class Surveyor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @NotNull
+    @Column(name="surveyorID")
     private Long id;
 
     private String username;
     private String firstName;
     private String lastName;
-    private String password;//any required format?
+    private String hashedPassword;
 
+    @OneToMany(targetEntity=Survey.class, mappedBy="ownerID")
     private List<Survey> surveys;
 
-    public Surveyor(String username, String firstName, String lastName, String password) {
+    public Surveyor(String username, String firstName, String lastName, String hashedPassword) {
         this.username = username;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.password = password;
+        this.hashedPassword = hashedPassword;
 
         this.surveys = new ArrayList<Survey>();
+    }
+
+    public Long getID() {
+        return this.id;
     }
 
     public String getUsername() {
@@ -47,7 +54,7 @@ public class Surveyor {
     }
 
     public String getPassword() {
-        return password;
+        return hashedPassword;
     }
 
     public void setUsername(String username) {
@@ -62,8 +69,8 @@ public class Surveyor {
         this.lastName = lastName;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setPassword(String hashedPassword) {
+        this.hashedPassword = hashedPassword;
     }
 
     public void addSurvey(Survey s) {
@@ -79,7 +86,7 @@ public class Surveyor {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Surveyor user = (Surveyor) o;
-        return Objects.equals(username, user.username) && Objects.equals(firstName, user.firstName) && Objects.equals(lastName, user.lastName) && Objects.equals(password, user.password);
+        return Objects.equals(username, user.username) && Objects.equals(firstName, user.firstName) && Objects.equals(lastName, user.lastName) && Objects.equals(hashedPassword, user.hashedPassword);
     }
 
     @Override
@@ -89,7 +96,7 @@ public class Surveyor {
                 ", username='" + username + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
-                ", password='" + password + '\'' +
+                ", password='" + hashedPassword + '\'' +
                 '}';
     }
 }

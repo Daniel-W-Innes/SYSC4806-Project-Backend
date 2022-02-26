@@ -1,0 +1,8 @@
+#Can include this in .gitignore - but this is required to run ... how do we go around this?
+spring.jpa.hibernate.ddl-auto=update
+spring.datasource.url=jdbc:postgresql://ec2-44-194-167-63.compute-1.amazonaws.com:5432/dcd1ibuvvcpc8c
+spring.datasource.username=euycouxbgxubtc
+spring.datasource.password=
+spring.jpa.show-sql=true
+spring.jpa.properties.hibernate.format_sql=true
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQL81Dialect
