@@ -1,5 +1,5 @@
 package ca.group20.sysc4806project.model;
-import lombok.AllArgsConstructor;
+
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -10,7 +10,6 @@ import java.util.Objects;
 
 @Entity
 @NoArgsConstructor
-@AllArgsConstructor
 public class Surveyor {
 
     @Id
@@ -23,7 +22,7 @@ public class Surveyor {
     private String lastName;
     private String hashedPassword;
 
-    @OneToMany(targetEntity=Survey.class, mappedBy = "surveyorId")
+    @OneToMany(targetEntity = Survey.class, mappedBy = "surveyorId")
     private List<Survey> surveys;
 
     public Surveyor(String username, String firstName, String lastName, String hashedPassword) {
@@ -32,51 +31,51 @@ public class Surveyor {
         this.lastName = lastName;
         this.hashedPassword = hashedPassword;
 
-        this.surveys = new ArrayList<Survey>();
+        this.surveys = new ArrayList<>();
     }
 
     public Long getSurveyorId() {
-        return this.surveyorId;
+        return surveyorId;
     }
 
     public String getUsername() {
         return username;
     }
 
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public String getPassword() {
-        return hashedPassword;
-    }
-
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public String getFirstName() {
+        return firstName;
     }
 
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
 
+    public String getLastName() {
+        return lastName;
+    }
+
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
 
-    public void setPassword(String hashedPassword) {
+    public String getHashedPassword() {
+        return hashedPassword;
+    }
+
+    public void setHashedPassword(String hashedPassword) {
         this.hashedPassword = hashedPassword;
     }
 
     public void addSurvey(Survey s) {
-        this.surveys.add(s);
+        surveys.add(s);
     }
 
     public List<Survey> getSurveys() {
-        return this.surveys;
+        return surveys;
     }
 
     @Override

@@ -1,6 +1,6 @@
 package ca.group20.sysc4806project.model;
 
-import lombok.AllArgsConstructor;
+import ca.group20.sysc4806project.model.question.Question;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -11,7 +11,6 @@ import java.util.Objects;
 
 @Entity
 @NoArgsConstructor
-@AllArgsConstructor
 public class Survey {
 
     @Id
@@ -20,42 +19,46 @@ public class Survey {
     private Long surveyId;
 
     @ManyToOne(targetEntity = Surveyor.class)
-    @JoinColumn(name="surveyorId")
+    @JoinColumn(name = "surveyorId")
     private Long surveyorId;
 
     private String name;
 
-    @OneToMany(targetEntity=Question.class, mappedBy = "surveyId")
+    @OneToMany(targetEntity = Question.class, mappedBy = "surveyId")
     private List<Question> questions;
 
     public Survey(Long surveyorId, String name) {
         this.name = name;
         this.surveyorId = surveyorId;
-        this.questions = new ArrayList<Question>();
+        this.questions = new ArrayList<>();
     }
 
-    public Long getSurveyId() { return this.surveyId; }
+    public Long getSurveyId() {
+        return surveyId;
+    }
 
     public String getName() {
-        return this.name;
+        return name;
     }
-
-    public Long getSurveyorId() { return this.surveyorId; }
 
     public void setName(String n) {
         this.name = n;
     }
 
-    public boolean addQuestion(Question q) {
-        return this.questions.add(q);
+    public Long getSurveyorId() {
+        return surveyorId;
     }
 
-    public boolean removeOption(String q) {
-        return this.questions.remove(q);
+    public boolean addQuestion(Question q) {
+        return questions.add(q);
+    }
+
+    public boolean removeOption(Question q) {
+        return questions.remove(q);
     }
 
     public List<Question> getQuestions() {
-        return this.questions;
+        return questions;
     }
 
     @Override

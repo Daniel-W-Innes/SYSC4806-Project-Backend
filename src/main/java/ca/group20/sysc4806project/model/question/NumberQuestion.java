@@ -1,13 +1,13 @@
-package ca.group20.sysc4806project.model;
+package ca.group20.sysc4806project.model.question;
 
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
 import java.util.Objects;
 
-@NoArgsConstructor
 @Entity
-public class NumberQuestion extends Question{
+@NoArgsConstructor
+public class NumberQuestion extends Question {
     private int max;
     private int min;
 
@@ -19,16 +19,20 @@ public class NumberQuestion extends Question{
     }
 
     public int getMax() {
-        return this.max;
+        return max;
+    }
+
+    public void setMax(int max) {
+        this.max = max;
     }
 
     public int getMin() {
-        return this.min;
+        return min;
     }
 
-    public void setMax() { this.max = max; }
-
-    public void setMin() { this.min = min; }
+    public void setMin(int min) {
+        this.min = min;
+    }
 
     @Override
     public String toString() {

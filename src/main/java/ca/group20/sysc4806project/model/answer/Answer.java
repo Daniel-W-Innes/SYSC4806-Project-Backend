@@ -1,6 +1,7 @@
-package ca.group20.sysc4806project.model;
+package ca.group20.sysc4806project.model.answer;
 
-import lombok.AllArgsConstructor;
+import ca.group20.sysc4806project.model.Survey;
+import ca.group20.sysc4806project.model.question.Question;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -10,8 +11,7 @@ import java.util.Objects;
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 @NoArgsConstructor
-@AllArgsConstructor
-public class SurveyAnswer {
+public class Answer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,33 +19,33 @@ public class SurveyAnswer {
     private Long answerId;
 
     @ManyToOne(targetEntity = Survey.class)
-    @JoinColumn(name="surveyId")
+    @JoinColumn(name = "surveyId")
     private Long surveyId;
 
     @ManyToOne(targetEntity = Question.class)
-    @JoinColumn(name="questionId")
+    @JoinColumn(name = "questionId")
     private Long questionId;
 
-    public SurveyAnswer(Long surveyId, Long questionId) {
+    public Answer(Long surveyId, Long questionId) {
         this.surveyId = surveyId;
         this.questionId = questionId;
     }
 
     public Long getAnswerId() {
-        return this.answerId;
+        return answerId;
     }
 
     public Long getSurveyId() {
-        return this.surveyId;
+        return surveyId;
     }
 
     public Long getQuestionId() {
-        return this.questionId;
+        return questionId;
     }
 
     @Override
     public String toString() {
-        return "SurveyAnswer{" +
+        return "Answer{" +
                 "answerId=" + answerId +
                 ", surveyId=" + surveyId +
                 ", questionId=" + questionId +
@@ -56,8 +56,9 @@ public class SurveyAnswer {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        SurveyAnswer that = (SurveyAnswer) o;
-        return Objects.equals(answerId, that.answerId) && Objects.equals(surveyId, that.surveyId) && Objects.equals(questionId, that.questionId);
+        Answer that = (Answer) o;
+        if (Objects.equals(answerId, that.answerId)) return true;
+        return Objects.equals(surveyId, that.surveyId) && Objects.equals(questionId, that.questionId);
     }
 
     @Override

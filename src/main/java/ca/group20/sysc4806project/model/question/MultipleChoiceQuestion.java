@@ -1,4 +1,4 @@
-package ca.group20.sysc4806project.model;
+package ca.group20.sysc4806project.model.question;
 
 import lombok.NoArgsConstructor;
 
@@ -8,8 +8,8 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-@NoArgsConstructor
 @Entity
+@NoArgsConstructor
 public class MultipleChoiceQuestion extends Question {
 
     @ElementCollection
@@ -18,19 +18,19 @@ public class MultipleChoiceQuestion extends Question {
     public MultipleChoiceQuestion(Long surveyId, String question) {
         super(surveyId, question);
 
-        this.options = new HashSet<String>();
+        this.options = new HashSet<>();
     }
 
     public boolean addOption(String option) {
-        return this.options.add(option);
+        return options.add(option);
     }
 
     public boolean removeOption(String option) {
-        return this.options.remove(option);
+        return options.remove(option);
     }
 
     public Set<String> getOptions() {
-        return this.options;
+        return options;
     }
 
     @Override
