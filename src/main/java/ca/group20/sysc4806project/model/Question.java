@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.Objects;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -15,35 +16,52 @@ public class Question {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @NotNull
-    @Column(name = "questionID", updatable = false, nullable = false)
-    private Long id;
+    private Long questionId;
 
-    @JoinColumn(name="surveyID")
     @ManyToOne(targetEntity = Survey.class)
-    private Long surveyID;
+    @JoinColumn(name="surveyId")
+    private Long surveyId;
 
-    private QuestionType type;
     private String question;
 
-    public Question(Long surveyID, QuestionType type, String question) {
-        this.surveyID = surveyID;
-        this.type = type;
+    public Question(Long surveyId, String question) {
+        this.surveyId = surveyId;
         this.question = question;
     }
 
-    public Long getID() {
-        return this.id;
+    public Long getQuestionId() {
+        return this.questionId;
     }
 
     public String getQuestion() {
         return this.question;
     }
 
-    public QuestionType getType() { return this.type; }
-
-    public Long getSurveyID() { return this.surveyID; }
+    public Long getSurveyId() { return this.surveyId; }
 
     public void setQuestion(String question) {
         this.question = question;
+    }
+
+    @Override
+    public String toString() {
+        return "Question{" +
+                "questionId=" + questionId +
+                ", surveyId=" + surveyId +
+                ", question='" + question + '\'' +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Question question1 = (Question) o;
+        return questionId.equals(question1.questionId) && surveyId.equals(question1.surveyId) && question.equals(question1.question);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(questionId, surveyId, question);
     }
 }

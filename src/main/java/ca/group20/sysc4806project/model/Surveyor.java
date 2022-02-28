@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
-@Table(name="surveyor")
 @NoArgsConstructor
 @AllArgsConstructor
 public class Surveyor {
@@ -17,15 +16,14 @@ public class Surveyor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @NotNull
-    @Column(name="surveyorID")
-    private Long id;
+    private Long surveyorId;
 
     private String username;
     private String firstName;
     private String lastName;
     private String hashedPassword;
 
-    @OneToMany(targetEntity=Survey.class, mappedBy="ownerID")
+    @OneToMany(targetEntity=Survey.class, mappedBy = "surveyorId")
     private List<Survey> surveys;
 
     public Surveyor(String username, String firstName, String lastName, String hashedPassword) {
@@ -37,8 +35,8 @@ public class Surveyor {
         this.surveys = new ArrayList<Survey>();
     }
 
-    public Long getID() {
-        return this.id;
+    public Long getSurveyorId() {
+        return this.surveyorId;
     }
 
     public String getUsername() {
@@ -82,21 +80,27 @@ public class Surveyor {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Surveyor user = (Surveyor) o;
-        return Objects.equals(username, user.username) && Objects.equals(firstName, user.firstName) && Objects.equals(lastName, user.lastName) && Objects.equals(hashedPassword, user.hashedPassword);
-    }
-
-    @Override
     public String toString() {
-        return "User{" +
-                "id=" + id +
+        return "Surveyor{" +
+                "surveyorId=" + surveyorId +
                 ", username='" + username + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
-                ", password='" + hashedPassword + '\'' +
+                ", hashedPassword='" + hashedPassword + '\'' +
+                ", surveys=" + surveys +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Surveyor surveyor = (Surveyor) o;
+        return Objects.equals(surveyorId, surveyor.surveyorId) && Objects.equals(username, surveyor.username) && Objects.equals(firstName, surveyor.firstName) && Objects.equals(lastName, surveyor.lastName) && Objects.equals(hashedPassword, surveyor.hashedPassword) && Objects.equals(surveys, surveyor.surveys);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(surveyorId, username, firstName, lastName, hashedPassword, surveys);
     }
 }

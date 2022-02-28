@@ -1,21 +1,19 @@
 package ca.group20.sysc4806project.model;
 
+import lombok.NoArgsConstructor;
+
 import javax.persistence.Entity;
 
+@NoArgsConstructor
 @Entity
 public class LongAnswerQuestion extends Question {
 
-    String answer; //need?
-
-    public LongAnswerQuestion(Long surveyID, String question) {
-        super(surveyID, QuestionType.LONG_ANSWER, question);
+    public LongAnswerQuestion(Long surveyId, String question) {
+        super(surveyId, question);
     }
 
-    public void setAnswer(String answer) {
-        this.answer = answer;
-    }
-
-    public String getAnswer() {
-        return this.answer;
+    @Override
+    public String toString() {
+        return "LongAnswerQuestion{}";
     }
 }
