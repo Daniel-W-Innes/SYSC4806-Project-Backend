@@ -1,5 +1,6 @@
 package ca.group20.sysc4806project.service;
 
+import ca.group20.sysc4806project.model.Survey;
 import ca.group20.sysc4806project.repository.SurveyRepo;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

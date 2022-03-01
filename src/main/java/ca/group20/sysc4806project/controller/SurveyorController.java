@@ -1,5 +1,6 @@
 package ca.group20.sysc4806project.controller;
 
+import ca.group20.sysc4806project.model.Survey;
 import ca.group20.sysc4806project.model.Surveyor;
 import ca.group20.sysc4806project.service.SurveyService;
 import ca.group20.sysc4806project.service.SurveyorService;
@@ -29,11 +30,11 @@ public class SurveyorController {
             Surveyor surveyor = surveyorService.getSurveyor(surveyorName);
             Survey newSurvey = surveyService.saveSurvey(survey);
             surveyor.addSurvey(survey);
+            URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/v0/surveyors/").toUriString());
+            return ResponseEntity.created(uri).body(newSurvey);
         } catch (Exception e) { // add new Exception for Survey already exists or survey already added
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
 
-        URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/v0/surveyors/").toUriString());
-        return ResponseEntity.created(uri).body(newSurvey);
     }
 }

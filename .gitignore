@@ -56,3 +56,6 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### DB Config ###
+application.properties

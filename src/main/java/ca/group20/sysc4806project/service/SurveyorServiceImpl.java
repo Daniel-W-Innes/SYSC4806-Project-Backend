@@ -19,13 +19,13 @@ public class SurveyorServiceImpl implements SurveyorService {
     @Override
     public Surveyor saveSurveyor(Surveyor surveyor) {
         Surveyor newSurveyor = surveyorRepo.save(surveyor);
-        log.info(surveyor.getName() + " has been saved");
+        log.info(surveyor.getUsername() + " has been saved");
         return newSurveyor;
     }
 
     @Override
-    public Surveyor getSurveyor(String surveyorName) {
-        log.info("Fetching Surveyor " + surveyorName);
-        return surveyorRepo.findByName(surveyorName);
+    public Surveyor getSurveyor(String surveyorUsername) {
+        log.info("Fetching Surveyor " + surveyorUsername);
+        return surveyorRepo.findByUsername(surveyorUsername);
     }
 }
