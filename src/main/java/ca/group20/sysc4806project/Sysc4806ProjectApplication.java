@@ -11,13 +11,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @SpringBootApplication
 public class Sysc4806ProjectApplication {
 
+    public static void main(String[] args) {
+        SpringApplication.run(Sysc4806ProjectApplication.class, args);
+    }
+
     @RequestMapping("/")
     @ResponseBody
     String health() {
         return "Hello World!";
-    }
-
-    public static void main(String[] args) {
-        SpringApplication.run(Sysc4806ProjectApplication.class, args);
     }
 }
