@@ -22,4 +22,9 @@ public class SurveyServiceImpl implements SurveyService {
         log.info(survey.getName() + " has been saved");
         return newSurvey;
     }
+
+    @Override
+    public Survey getSurvey(String name) {
+        return surveyRepo.findByName(name);
+    }
 }

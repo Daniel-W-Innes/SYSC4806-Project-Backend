@@ -35,6 +35,14 @@ public class SurveyorController {
         } catch (Exception e) { // add new Exception for Survey already exists or survey already added
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
+    }
 
+    @GetMapping("/survey")
+    public ResponseEntity<?> getSurvey(@RequestParam String name) {
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(surveyService.getSurvey(name));
+        } catch (Exception e) { // add new Exception for Survey already exists or survey already added
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
     }
 }
