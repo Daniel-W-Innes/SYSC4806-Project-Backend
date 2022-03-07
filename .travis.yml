@@ -1,8 +1,13 @@
 language: java
 jdk:
   - openjdk17
+services:
+  - postgresql
 before_install:
   - chmod +x mvnw
 branches:
   only:
     - master
+env:
+  - DB_USER=postgres
+  - DB_URI=postgresql://localhost:5432/
