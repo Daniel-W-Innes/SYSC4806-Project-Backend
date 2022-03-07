@@ -9,4 +9,4 @@ branches:
   only:
     - master
 env:
-  - DB_USER=postgres DB_URI=postgresql://localhost:5432/
+  - DB_USER=postgres DB_URI=postgresql://localhost:5432/ DB_PASSWORD=
