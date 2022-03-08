@@ -77,6 +77,8 @@ public class SurveyorController {
         } catch (Exception e) { // add new exception
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
+    }
+    
     @GetMapping("/survey")
     public ResponseEntity<?> getSurvey(@RequestParam String name) {
         try {
