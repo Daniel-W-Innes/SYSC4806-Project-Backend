@@ -3,7 +3,6 @@ package ca.group20.sysc4806project.model;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -14,7 +13,7 @@ public class Surveyor {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long surveyorId;
+    private Long id;
 
     private String username;
     private String firstName;
@@ -32,8 +31,8 @@ public class Surveyor {
         this.surveys = new ArrayList<>();
     }
 
-    public Long getSurveyorId() {
-        return surveyorId;
+    public Long getId() {
+        return id;
     }
 
     public String getUsername() {
@@ -79,7 +78,7 @@ public class Surveyor {
     @Override
     public String toString() {
         return "Surveyor{" +
-                "surveyorId=" + surveyorId +
+                "id=" + id +
                 ", username='" + username + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
@@ -93,11 +92,12 @@ public class Surveyor {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Surveyor surveyor = (Surveyor) o;
-        return Objects.equals(surveyorId, surveyor.surveyorId) && Objects.equals(username, surveyor.username) && Objects.equals(firstName, surveyor.firstName) && Objects.equals(lastName, surveyor.lastName) && Objects.equals(hashedPassword, surveyor.hashedPassword) && Objects.equals(surveys, surveyor.surveys);
+        if (Objects.equals(id, surveyor.id)) return true;
+        return Objects.equals(username, surveyor.username) && Objects.equals(firstName, surveyor.firstName) && Objects.equals(lastName, surveyor.lastName) && Objects.equals(hashedPassword, surveyor.hashedPassword) && Objects.equals(surveys, surveyor.surveys);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(surveyorId, username, firstName, lastName, hashedPassword, surveys);
+        return Objects.hash(id, username, firstName, lastName, hashedPassword, surveys);
     }
 }

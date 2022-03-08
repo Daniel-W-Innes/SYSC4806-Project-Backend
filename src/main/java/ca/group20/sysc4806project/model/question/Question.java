@@ -1,11 +1,9 @@
 package ca.group20.sysc4806project.model.question;
 
 import ca.group20.sysc4806project.model.Survey;
-import ca.group20.sysc4806project.model.Surveyor;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
 @Entity
@@ -15,10 +13,9 @@ public class Question {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long questionId;
+    private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "surveyId")
     private Survey survey;
 
     private String question;
@@ -27,10 +24,12 @@ public class Question {
         this.question = question;
     }
 
-    public void setSurvey(Survey survey) { this.survey = survey; }
+    public void setSurvey(Survey survey) {
+        this.survey = survey;
+    }
 
-    public Long getQuestionId() {
-        return questionId;
+    public Long getId() {
+        return id;
     }
 
     public String getQuestion() {
@@ -42,13 +41,13 @@ public class Question {
     }
 
     public Long getSurveyId() {
-        return survey.getSurveyId();
+        return survey.getId();
     }
 
     @Override
     public String toString() {
         return "Question{" +
-                "questionId=" + questionId +
+                "id=" + id +
                 ", surveyId=" + getSurveyId() +
                 ", question='" + question + '\'' +
                 '}';
@@ -59,7 +58,7 @@ public class Question {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Question question1 = (Question) o;
-        if (Objects.equals(questionId, question1.questionId)) return true;
+        if (Objects.equals(id, question1.id)) return true;
         return Objects.equals(getSurveyId(), question1.getSurveyId()) && Objects.equals(question, question1.question);
     }
 

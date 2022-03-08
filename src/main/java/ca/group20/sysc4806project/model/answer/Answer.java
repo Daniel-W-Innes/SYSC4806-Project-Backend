@@ -14,36 +14,38 @@ public class Answer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long answerId;
+    private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "surveyId")
     private Survey survey;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "questionId")
     private Question question;
 
-    public Long getAnswerId() {
-        return answerId;
+    public Long getId() {
+        return id;
     }
 
-    public void setSurvey(Survey survey) { this.survey = survey; }
+    public void setSurvey(Survey survey) {
+        this.survey = survey;
+    }
 
-    public void setQuestion(Question question) { this.question = question; }
+    public void setQuestion(Question question) {
+        this.question = question;
+    }
 
     public Long getSurveyId() {
-        return survey.getSurveyId();
+        return survey.getId();
     }
 
     public Long getQuestionId() {
-        return question.getQuestionId();
+        return question.getId();
     }
 
     @Override
     public String toString() {
         return "Answer{" +
-                "answerId=" + answerId +
+                "id=" + id +
                 ", surveyId=" + getSurveyId() +
                 ", questionId=" + getQuestionId() +
                 '}';
@@ -54,12 +56,12 @@ public class Answer {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Answer that = (Answer) o;
-        if (Objects.equals(answerId, that.answerId)) return true;
+        if (Objects.equals(id, that.id)) return true;
         return Objects.equals(getSurveyId(), that.getSurveyId()) && Objects.equals(getQuestionId(), that.getQuestionId());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(answerId, getSurveyId(), getQuestionId());
+        return Objects.hash(id, getSurveyId(), getQuestionId());
     }
 }
