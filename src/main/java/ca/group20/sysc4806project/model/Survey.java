@@ -53,7 +53,7 @@ public class Survey {
         return questions.add(q);
     }
 
-    public boolean removeOption(Question q) {
+    public boolean removeQuestion(Question q) {
         return questions.remove(q);
     }
 
