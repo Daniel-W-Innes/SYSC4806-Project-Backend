@@ -13,11 +13,10 @@ import java.util.Set;
 public class MultipleChoiceQuestion extends Question {
 
     @ElementCollection
-    Set<String> options;
+    private Set<String> options;
 
-    public MultipleChoiceQuestion(Long surveyId, String question) {
-        super(surveyId, question);
-
+    public MultipleChoiceQuestion(String question) {
+        super(question);
         this.options = new HashSet<>();
     }
 
