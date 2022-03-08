@@ -6,6 +6,7 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 @Entity
 @NoArgsConstructor
@@ -73,6 +74,10 @@ public class Surveyor {
 
     public List<Survey> getSurveys() {
         return surveys;
+    }
+
+    public Optional<Survey> getSurvey(String name) {
+        return surveys.stream().filter(survey -> survey.getName().equals(name)).findFirst();
     }
 
     @Override
