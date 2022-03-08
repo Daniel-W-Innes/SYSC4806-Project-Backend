@@ -78,4 +78,14 @@ public class SurveyorController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
     }
+
+    @GetMapping("/{surveyorName}/survey")
+    public ResponseEntity<?> getSurvey(@PathVariable("surveyorName") String surveyorName, @RequestParam String name) {
+        try {
+            Surveyor surveyor = surveyorService.getSurveyor(surveyorName);
+            return ResponseEntity.status(HttpStatus.OK).body(surveyor.getSurvey(name));
+        } catch (Exception e) { // add new Exception for Survey already exists or survey already added
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
+    }
 }
