@@ -15,21 +15,19 @@ public class Survey {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @NotNull
     private Long surveyId;
 
-    @ManyToOne(targetEntity = Surveyor.class)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "surveyorId")
-    private Long surveyorId;
+    private Surveyor surveyor;
 
     private String name;
 
-    @OneToMany(targetEntity = Question.class, mappedBy = "surveyId")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "survey")
     private List<Question> questions;
 
-    public Survey(Long surveyorId, String name) {
+    public Survey(String name) {
         this.name = name;
-        this.surveyorId = surveyorId;
         this.questions = new ArrayList<>();
     }
 
@@ -45,8 +43,12 @@ public class Survey {
         this.name = n;
     }
 
+    public void setSurveyor(Surveyor surveyor) {
+        this.surveyor = surveyor;
+    }
+
     public Long getSurveyorId() {
-        return surveyorId;
+        return surveyor.getSurveyorId();
     }
 
     public boolean addQuestion(Question q) {
@@ -65,7 +67,7 @@ public class Survey {
     public String toString() {
         return "Survey{" +
                 "surveyId=" + surveyId +
-                ", surveyorId=" + surveyorId +
+                ", surveyorId=" + getSurveyorId() +
                 ", name='" + name + '\'' +
                 ", questions=" + questions +
                 '}';
@@ -76,11 +78,11 @@ public class Survey {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Survey survey = (Survey) o;
-        return Objects.equals(surveyId, survey.surveyId) && Objects.equals(surveyorId, survey.surveyorId) && Objects.equals(name, survey.name) && Objects.equals(questions, survey.questions);
+        return Objects.equals(surveyId, survey.surveyId) && Objects.equals(getSurveyorId(), survey.getSurveyorId()) && Objects.equals(name, survey.name) && Objects.equals(questions, survey.questions);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(surveyId, surveyorId, name, questions);
+        return Objects.hash(surveyId, getSurveyorId(), name, questions);
     }
 }

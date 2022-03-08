@@ -14,7 +14,6 @@ public class Surveyor {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @NotNull
     private Long surveyorId;
 
     private String username;
@@ -22,7 +21,7 @@ public class Surveyor {
     private String lastName;
     private String hashedPassword;
 
-    @OneToMany(targetEntity = Survey.class, mappedBy = "surveyorId")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "surveyor")
     private List<Survey> surveys;
 
     public Surveyor(String username, String firstName, String lastName, String hashedPassword) {
@@ -30,7 +29,6 @@ public class Surveyor {
         this.firstName = firstName;
         this.lastName = lastName;
         this.hashedPassword = hashedPassword;
-
         this.surveys = new ArrayList<>();
     }
 

@@ -8,12 +8,12 @@ import java.util.Objects;
 @Entity
 @NoArgsConstructor
 public class NumberQuestion extends Question {
+
     private int max;
     private int min;
 
-    public NumberQuestion(Long surveyId, String question, int max, int min) {
-        super(surveyId, question);
-
+    public NumberQuestion(String question, int max, int min) {
+        super(question);
         this.max = max;
         this.min = min;
     }
