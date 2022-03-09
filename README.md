@@ -7,7 +7,7 @@ Surveyor can create a survey with a list of Questions. Questions can be open-end
 ## Team Members:
 - Adi El Sammak
 - Astrid MacKinnon
-- Danniel Innes
+- Daniel Innes
 - Erik Iuhas
 - Marianne Brissette
 
@@ -26,7 +26,6 @@ The database structure is very similar to the structure of the model classes. We
 
 
 ### Operational Use Case
-
 Our operational use case is to take the list of surveys that were created by a specific surveyor and to display it. The survey names and IDs are stored in the database (back-end) and we format this data into an HTML table before displaying it.
 
 ![ListOfSurveys](/documentation/ListOfSurveys.png)
