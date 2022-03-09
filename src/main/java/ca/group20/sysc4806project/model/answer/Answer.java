@@ -5,7 +5,6 @@ import ca.group20.sysc4806project.model.question.Question;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
 @Entity
@@ -15,40 +14,40 @@ public class Answer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @NotNull
-    private Long answerId;
+    private Long id;
 
-    @ManyToOne(targetEntity = Survey.class)
-    @JoinColumn(name = "surveyId")
-    private Long surveyId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Survey survey;
 
-    @ManyToOne(targetEntity = Question.class)
-    @JoinColumn(name = "questionId")
-    private Long questionId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Question question;
 
-    public Answer(Long surveyId, Long questionId) {
-        this.surveyId = surveyId;
-        this.questionId = questionId;
+    public Long getId() {
+        return id;
     }
 
-    public Long getAnswerId() {
-        return answerId;
+    public void setSurvey(Survey survey) {
+        this.survey = survey;
+    }
+
+    public void setQuestion(Question question) {
+        this.question = question;
     }
 
     public Long getSurveyId() {
-        return surveyId;
+        return survey.getId();
     }
 
     public Long getQuestionId() {
-        return questionId;
+        return question.getId();
     }
 
     @Override
     public String toString() {
         return "Answer{" +
-                "answerId=" + answerId +
-                ", surveyId=" + surveyId +
-                ", questionId=" + questionId +
+                "id=" + id +
+                ", surveyId=" + getSurveyId() +
+                ", questionId=" + getQuestionId() +
                 '}';
     }
 
@@ -57,12 +56,12 @@ public class Answer {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Answer that = (Answer) o;
-        if (Objects.equals(answerId, that.answerId)) return true;
-        return Objects.equals(surveyId, that.surveyId) && Objects.equals(questionId, that.questionId);
+        if (Objects.equals(id, that.id)) return true;
+        return Objects.equals(getSurveyId(), that.getSurveyId()) && Objects.equals(getQuestionId(), that.getQuestionId());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(answerId, surveyId, questionId);
+        return Objects.hash(id, getSurveyId(), getQuestionId());
     }
 }

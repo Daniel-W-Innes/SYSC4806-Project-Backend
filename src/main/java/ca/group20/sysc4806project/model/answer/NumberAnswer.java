@@ -8,11 +8,10 @@ import java.util.Objects;
 @Entity
 @NoArgsConstructor
 public class NumberAnswer extends Answer { // answer to a number question
+
     private int answer;
 
-    public NumberAnswer(Long surveyId, Long questionId, int answer) {
-        super(surveyId, questionId);
-
+    public NumberAnswer(int answer) {
         this.answer = answer;
     }
 

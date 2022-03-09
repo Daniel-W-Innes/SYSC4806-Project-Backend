@@ -8,11 +8,10 @@ import java.util.Objects;
 @Entity
 @NoArgsConstructor
 public class TextAnswer extends Answer { // answer to a long answer question
+
     private String answer;
 
-    public TextAnswer(Long surveyId, Long questionId, String answer) {
-        super(surveyId, questionId);
-
+    public TextAnswer(String answer) {
         this.answer = answer;
     }
 
