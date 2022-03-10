@@ -49,6 +49,10 @@ public class Survey {
         return surveyor.getId();
     }
 
+    public List<Question> getQuestions() {
+        return questions;
+    }
+
     public boolean addQuestion(Question q) {
         return questions.add(q);
     }
