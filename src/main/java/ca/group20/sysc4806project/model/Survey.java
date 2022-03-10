@@ -80,8 +80,8 @@ public class Survey {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Survey survey = (Survey) o;
-        if (Objects.equals(id, survey.id)) return true;
-        return Objects.equals(id, survey.getSurveyorId()) && Objects.equals(name, survey.getName()) && Objects.equals(questions, survey.getQuestions());
+        if (Objects.equals(id, survey.getId())) return true;
+        return Objects.equals(getSurveyorId(), survey.getSurveyorId()) && Objects.equals(name, survey.getName()) && Objects.equals(questions, survey.getQuestions());
     }
 
     @Override
