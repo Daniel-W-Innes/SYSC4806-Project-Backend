@@ -15,9 +15,16 @@ public class MultipleChoiceQuestion extends Question {
     @ElementCollection
     private Set<String> options;
 
-    public MultipleChoiceQuestion(String question) {
+    private MultipleChoiceType type;
+
+    public MultipleChoiceQuestion(String question, MultipleChoiceType type) {
         super(question);
+        this.type = type;
         this.options = new HashSet<>();
+    }
+
+    public Set<String> getOptions() {
+        return options;
     }
 
     public boolean addOption(String option) {
@@ -28,14 +35,19 @@ public class MultipleChoiceQuestion extends Question {
         return options.remove(option);
     }
 
-    public Set<String> getOptions() {
-        return options;
+    public MultipleChoiceType getType() {
+        return type;
+    }
+
+    public void setType(MultipleChoiceType type) {
+        this.type = type;
     }
 
     @Override
     public String toString() {
         return "MultipleChoiceQuestion{" +
                 "options=" + options +
+                ", type=" + type +
                 '}';
     }
 
@@ -44,11 +56,11 @@ public class MultipleChoiceQuestion extends Question {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         MultipleChoiceQuestion that = (MultipleChoiceQuestion) o;
-        return Objects.equals(options, that.options);
+        return Objects.equals(options, that.options) && Objects.equals(type, that.type);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(options);
+        return Objects.hash(options, type);
     }
 }
