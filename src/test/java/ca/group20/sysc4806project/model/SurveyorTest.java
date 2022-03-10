@@ -1,41 +1,34 @@
 package ca.group20.sysc4806project.model;
 
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class SurveyorTest {
-
     private Surveyor test_surveyor;
+
     @BeforeEach
-    public void setUp() throws Exception {
-        test_surveyor = new Surveyor("SquidGuy", "Erik", "Iuhas","####");
+    public void setUp() {
+        test_surveyor = new Surveyor("SquidGuy", "Erik", "Iuhas", "####");
     }
 
-    @AfterEach
-    public void tearDown() throws Exception {
-        test_surveyor = null;
-    }
 
     @Test
-    public void addSurvey(){
+    public void addSurvey() {
         Survey test_survey1 = new Survey("Amazing Survey");
         test_surveyor.addSurvey(test_survey1);
-        assertEquals(1,test_surveyor.getSurveys().size());
-        System.out.println("Success! Adds a survey to Surveyor Successfully!");
+        assertEquals(1, test_surveyor.getSurveys().size());
     }
 
     @Test
-    public void multipleSurveys(){
+    public void multipleSurveys() {
         Survey test_survey1 = new Survey("Amazing Survey");
         Survey test_survey2 = new Survey("Terrible Survey");
         Survey test_survey3 = new Survey("Dazling Survey");
         test_surveyor.addSurvey(test_survey1);
         test_surveyor.addSurvey(test_survey2);
         test_surveyor.addSurvey(test_survey3);
-        assertEquals(3,test_surveyor.getSurveys().size());
-        System.out.println("Success! Adds multiple Surveys to Surveyor Successfully!");
+        assertEquals(3, test_surveyor.getSurveys().size());
     }
 }
