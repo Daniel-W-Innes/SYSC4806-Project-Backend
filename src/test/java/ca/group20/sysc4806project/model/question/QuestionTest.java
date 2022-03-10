@@ -1,6 +1,5 @@
 package ca.group20.sysc4806project.model.question;
 
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -16,7 +15,6 @@ public class QuestionTest {
         question_str = "What time is it?";
         multi_question = new MultipleChoiceQuestion(question_str, MultipleChoiceType.MULTI_SELECTION);
     }
-
 
     @Test
     public void addOptions() {
