@@ -7,6 +7,9 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.util.Objects;
 
+/**
+ * Answers are assigned to questions in surveys, a question can have more than one answer
+ */
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 @NoArgsConstructor
@@ -42,6 +45,9 @@ public class Answer {
         return question.getId();
     }
 
+    /**
+     * Converts Object to string
+     */
     @Override
     public String toString() {
         return "Answer{" +
@@ -51,6 +57,11 @@ public class Answer {
                 '}';
     }
 
+    /**
+     * Compares two objects to see if they are equal
+     * @param o the other object
+     * @return are they equal, boolean
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

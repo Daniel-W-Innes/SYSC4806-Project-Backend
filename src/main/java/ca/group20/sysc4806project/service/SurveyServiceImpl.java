@@ -8,6 +8,9 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 
+/**
+ * Use to connect to Survey Database
+ */
 @Service
 @RequiredArgsConstructor
 @Transactional
@@ -16,6 +19,11 @@ public class SurveyServiceImpl implements SurveyService {
 
     private final SurveyRepo surveyRepo;
 
+    /**
+     * Adds a new survey to the database
+     * @param survey survey to be added
+     * @return newly created survey
+     */
     @Override
     public Survey saveSurvey(Survey survey) {
         Survey newSurvey = surveyRepo.save(survey);

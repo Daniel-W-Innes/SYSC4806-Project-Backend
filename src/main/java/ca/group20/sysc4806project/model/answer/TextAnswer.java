@@ -5,6 +5,9 @@ import lombok.NoArgsConstructor;
 import javax.persistence.Entity;
 import java.util.Objects;
 
+/**
+ * Extends Answer, for long answer questions
+ */
 @Entity
 @NoArgsConstructor
 public class TextAnswer extends Answer { // answer to a long answer question
@@ -23,6 +26,9 @@ public class TextAnswer extends Answer { // answer to a long answer question
         this.answer = answer;
     }
 
+    /**
+     * Converts Object to string
+     */
     @Override
     public String toString() {
         return "TextAnswer{" +
@@ -30,6 +36,11 @@ public class TextAnswer extends Answer { // answer to a long answer question
                 '}';
     }
 
+    /**
+     * Compares two objects to see if they are equal
+     * @param o the other object
+     * @return are they equal, boolean
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

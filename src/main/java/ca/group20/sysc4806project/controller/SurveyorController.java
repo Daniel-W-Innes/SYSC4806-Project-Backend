@@ -15,6 +15,9 @@ import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 
+/**
+ * Controllers all calls to the database
+ */
 @RestController
 @RequestMapping("/api/v0/surveyors")
 @RequiredArgsConstructor
@@ -24,6 +27,11 @@ public class SurveyorController {
     private final SurveyorService surveyorService;
     private final SurveyService surveyService;
 
+    /**
+     * Creates a new surveyor to be added to the database
+     * @param surveyor new surveyor to be created
+     * @return created surveyor
+     */
     @PostMapping("")
     public ResponseEntity<?> create(@Valid @RequestBody Surveyor surveyor) {
         try {
@@ -39,6 +47,11 @@ public class SurveyorController {
         }
     }
 
+    /**
+     * Using a given surveyor's name, return the surveyor matching that name
+     * @param surveyorName surveyor's name given as a string
+     * @return a surveyor
+     */
     @GetMapping("/{surveyorName}")
     public ResponseEntity<?> get(@PathVariable("surveyorName") String surveyorName) {
         try {
@@ -49,6 +62,12 @@ public class SurveyorController {
         }
     }
 
+    /**
+     * Creates a survey under a given surveyor's name.
+     * @param surveyorName surveyor's name given as a string
+     * @param survey the survey being created
+     * @return the newly created survey
+     */
     @PostMapping("/{surveyorName}/surveys")
     public ResponseEntity<?> createSurvey(@PathVariable("surveyorName") String surveyorName,
                                           @Valid @RequestBody Survey survey) {
@@ -68,6 +87,11 @@ public class SurveyorController {
         }
     }
 
+    /**
+     * Using a given surveyor's name, return the list of surveys assigned to that surveyor
+     * @param surveyorName surveyor's name given as a string
+     * @return list of surveys
+     */
     @GetMapping("/{surveyorName}/surveys")
     public ResponseEntity<?> getSurveys(@PathVariable("surveyorName") String surveyorName) {
         try {
@@ -79,6 +103,12 @@ public class SurveyorController {
         }
     }
 
+    /**
+     * Using a given surveyor's name and a survey name, return the survey with matching name and surveyor name
+     * @param surveyorName surveyor's name given as a string
+     * @param name The name of the survey as a string
+     * @return a survey
+     */
     @GetMapping("/{surveyorName}/survey")
     public ResponseEntity<?> getSurvey(@PathVariable("surveyorName") String surveyorName, @RequestParam String name) {
         try {

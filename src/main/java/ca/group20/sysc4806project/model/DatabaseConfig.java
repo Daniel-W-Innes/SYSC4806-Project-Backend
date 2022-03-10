@@ -8,6 +8,9 @@ import org.springframework.context.annotation.Configuration;
 
 import javax.sql.DataSource;
 
+/**
+ * Setting up the database configuration
+ */
 @Configuration
 public class DatabaseConfig {
 

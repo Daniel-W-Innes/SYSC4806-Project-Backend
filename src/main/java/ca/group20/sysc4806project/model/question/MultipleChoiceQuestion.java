@@ -8,6 +8,9 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+/**
+ * Extends Question, for creating a multiple choice question
+ */
 @Entity
 @NoArgsConstructor
 public class MultipleChoiceQuestion extends Question {
@@ -32,6 +35,9 @@ public class MultipleChoiceQuestion extends Question {
         return options;
     }
 
+    /**
+     * Converts Object to string
+     */
     @Override
     public String toString() {
         return "MultipleChoiceQuestion{" +
@@ -39,6 +45,11 @@ public class MultipleChoiceQuestion extends Question {
                 '}';
     }
 
+    /**
+     * Compares two objects to see if they are equal
+     * @param o the other object
+     * @return are they equal, boolean
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

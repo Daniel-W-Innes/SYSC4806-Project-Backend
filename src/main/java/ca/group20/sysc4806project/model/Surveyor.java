@@ -8,6 +8,9 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
+/**
+ * Surveyor is a person that owns one or multiple surveys
+ */
 @Entity
 @NoArgsConstructor
 public class Surveyor {
@@ -80,6 +83,9 @@ public class Surveyor {
         return surveys.stream().filter(survey -> survey.getName().equals(name)).findFirst();
     }
 
+    /**
+     * Converts Object to string
+     */
     @Override
     public String toString() {
         return "Surveyor{" +
@@ -92,6 +98,11 @@ public class Surveyor {
                 '}';
     }
 
+    /**
+     * Compares two objects to see if they are equal
+     * @param o the other object
+     * @return are they equal, boolean
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
