@@ -65,6 +65,12 @@ public class Survey {
         return questions.contains(question);
     }
 
+    public String toJson() {
+        return "{" +
+                "\"name\":\"" + name + "\"" +
+                '}';
+    }
+
     @Override
     public String toString() {
         return "Survey{" +

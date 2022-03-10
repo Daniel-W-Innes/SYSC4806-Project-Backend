@@ -80,6 +80,14 @@ public class Surveyor {
          return surveys.add(s);
     }
 
+    public String toJson() {
+        return "{" +
+                "\"username\":\"" + username + "\"" +
+                ",\"firstName\":\"" + firstName + "\"" +
+                ",\"lastName\":\"" + lastName + "\"" +
+                ",\"hashedPassword\":\"" + hashedPassword + "\"" +
+                '}';
+    }
     @Override
     public String toString() {
         return "Surveyor{" +
@@ -91,6 +99,7 @@ public class Surveyor {
                 ", surveys=" + surveys +
                 '}';
     }
+
 
     @Override
     public boolean equals(Object o) {
