@@ -1,4 +1,4 @@
-<?xml version="1.1" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
@@ -12,7 +12,7 @@
 
     <groupId>ca.group20</groupId>
     <artifactId>SYSC4806-Project</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.1</version>
     <name>SYSC4806-Project</name>
     <description>SYSC4806-Project</description>
     <properties>
