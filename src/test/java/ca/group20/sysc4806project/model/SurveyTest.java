@@ -4,13 +4,10 @@ import ca.group20.sysc4806project.model.question.NumberQuestion;
 import ca.group20.sysc4806project.model.question.Question;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-
-@SpringBootTest
 public class SurveyTest {
     private Survey test_survey;
 

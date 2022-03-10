@@ -2,11 +2,9 @@ package ca.group20.sysc4806project.model;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-@SpringBootTest
 public class SurveyorTest {
     private Surveyor test_surveyor;
 

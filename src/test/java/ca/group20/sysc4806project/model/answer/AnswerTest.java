@@ -4,12 +4,10 @@ import ca.group20.sysc4806project.model.Survey;
 import ca.group20.sysc4806project.model.question.Question;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
-@SpringBootTest
 public class AnswerTest {
 
     private Question test_question;
