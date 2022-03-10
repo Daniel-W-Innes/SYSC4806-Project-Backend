@@ -43,8 +43,8 @@ public class MultipleChoiceQuestion extends Question {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        MultipleChoiceQuestion that = (MultipleChoiceQuestion) o;
-        return Objects.equals(options, that.options);
+        MultipleChoiceQuestion multi_ques = (MultipleChoiceQuestion) o;
+        return Objects.equals(options, multi_ques.getOptions());
     }
 
     @Override

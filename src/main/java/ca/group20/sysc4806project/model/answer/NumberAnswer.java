@@ -35,8 +35,8 @@ public class NumberAnswer extends Answer { // answer to a number question
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
-        NumberAnswer that = (NumberAnswer) o;
-        return answer == that.answer;
+        NumberAnswer num_ans = (NumberAnswer) o;
+        return answer == num_ans.getAnswer();
     }
 
     @Override

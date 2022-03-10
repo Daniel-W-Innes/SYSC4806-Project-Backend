@@ -61,6 +61,10 @@ public class Survey {
         return questions;
     }
 
+    public Boolean hasQuestion(Question question){
+        return questions.contains(question);
+    }
+
     @Override
     public String toString() {
         return "Survey{" +
@@ -77,7 +81,7 @@ public class Survey {
         if (o == null || getClass() != o.getClass()) return false;
         Survey survey = (Survey) o;
         if (Objects.equals(id, survey.id)) return true;
-        return Objects.equals(getSurveyorId(), survey.getSurveyorId()) && Objects.equals(name, survey.name) && Objects.equals(questions, survey.questions);
+        return Objects.equals(id, survey.getSurveyorId()) && Objects.equals(name, survey.getName()) && Objects.equals(questions, survey.getQuestions());
     }
 
     @Override

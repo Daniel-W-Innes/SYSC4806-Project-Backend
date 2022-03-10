@@ -57,9 +57,9 @@ public class Question {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Question question1 = (Question) o;
-        if (Objects.equals(id, question1.id)) return true;
-        return Objects.equals(getSurveyId(), question1.getSurveyId()) && Objects.equals(question, question1.question);
+        Question ques = (Question) o;
+        if (Objects.equals(id, ques.getId())) return true;
+        return Objects.equals(id, ques.getSurveyId()) && Objects.equals(question, ques.getQuestion());
     }
 
     @Override
