@@ -46,8 +46,8 @@ public class TextAnswer extends Answer { // answer to a long answer question
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
-        TextAnswer that = (TextAnswer) o;
-        return Objects.equals(answer, that.answer);
+        TextAnswer text_ans = (TextAnswer) o;
+        return Objects.equals(answer, text_ans.getAnswer());
     }
 
     @Override

@@ -64,6 +64,10 @@ public class Survey {
         return questions;
     }
 
+    public Boolean hasQuestion(Question question){
+        return questions.contains(question);
+    }
+
     /**
      * Converts Object to string
      */
@@ -87,8 +91,8 @@ public class Survey {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Survey survey = (Survey) o;
-        if (Objects.equals(id, survey.id)) return true;
-        return Objects.equals(getSurveyorId(), survey.getSurveyorId()) && Objects.equals(name, survey.name) && Objects.equals(questions, survey.questions);
+        if (Objects.equals(id, survey.getId())) return true;
+        return Objects.equals(getSurveyorId(), survey.getSurveyorId()) && Objects.equals(name, survey.getName()) && Objects.equals(questions, survey.getQuestions());
     }
 
     @Override

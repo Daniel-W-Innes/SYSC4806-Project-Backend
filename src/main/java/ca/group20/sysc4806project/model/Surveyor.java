@@ -71,16 +71,16 @@ public class Surveyor {
         this.hashedPassword = hashedPassword;
     }
 
-    public void addSurvey(Survey s) {
-        surveys.add(s);
-    }
-
     public List<Survey> getSurveys() {
         return surveys;
     }
 
     public Optional<Survey> getSurvey(String name) {
         return surveys.stream().filter(survey -> survey.getName().equals(name)).findFirst();
+    }
+
+    public boolean addSurvey(Survey s) {
+         return surveys.add(s);
     }
 
     /**

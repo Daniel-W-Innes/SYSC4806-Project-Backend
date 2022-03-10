@@ -1,4 +1,4 @@
-package ca.group20.sysc4806project.model;
+package ca.group20.sysc4806project.config;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;

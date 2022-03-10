@@ -29,20 +29,20 @@ public class Answer {
         return id;
     }
 
-    public void setSurvey(Survey survey) {
-        this.survey = survey;
-    }
-
-    public void setQuestion(Question question) {
-        this.question = question;
-    }
-
     public Long getSurveyId() {
         return survey.getId();
     }
 
+    public void setSurvey(Survey survey) {
+        this.survey = survey;
+    }
+
     public Long getQuestionId() {
         return question.getId();
+    }
+
+    public void setQuestion(Question question) {
+        this.question = question;
     }
 
     /**
@@ -66,9 +66,9 @@ public class Answer {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Answer that = (Answer) o;
-        if (Objects.equals(id, that.id)) return true;
-        return Objects.equals(getSurveyId(), that.getSurveyId()) && Objects.equals(getQuestionId(), that.getQuestionId());
+        Answer ans = (Answer) o;
+        if (Objects.equals(id, ans.getId())) return true;
+        return Objects.equals(getSurveyId(), ans.getSurveyId()) && Objects.equals(getQuestionId(), ans.getQuestionId());
     }
 
     @Override

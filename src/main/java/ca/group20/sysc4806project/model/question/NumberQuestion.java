@@ -58,8 +58,8 @@ public class NumberQuestion extends Question {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
-        NumberQuestion that = (NumberQuestion) o;
-        return max == that.max && min == that.min;
+        NumberQuestion num_ques = (NumberQuestion) o;
+        return max == num_ques.getMax() && min == num_ques.getMin();
     }
 
     @Override
