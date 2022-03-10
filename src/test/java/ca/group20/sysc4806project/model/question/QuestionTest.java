@@ -1,40 +1,35 @@
 package ca.group20.sysc4806project.model.question;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
 
-import static org.junit.Assert.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class QuestionTest {
 
-    private MultipleChoiceQuestion mult_question;
+    private MultipleChoiceQuestion multi_question;
     private String question_str;
 
-    @Before
-    public void setUp() throws Exception {
+    @BeforeEach
+    public void setUp() {
         question_str = "What time is it?";
-        mult_question = new MultipleChoiceQuestion(question_str,MultipleChoiceType.MULTI_SELECTION);
+        multi_question = new MultipleChoiceQuestion(question_str,MultipleChoiceType.MULTI_SELECTION);
     }
 
-    @After
-    public void tearDown() throws Exception {
-        mult_question = null;
-        question_str = null;
-    }
 
     @Test
     public void addOptions(){
-        mult_question.addOption("1pm");
-        mult_question.addOption("2pm");
-        mult_question.addOption("7pm");
-        assertEquals(3,mult_question.getOptions().size());
+        multi_question.addOption("1pm");
+        multi_question.addOption("2pm");
+        multi_question.addOption("7pm");
+        assertEquals(3, multi_question.getOptions().size());
         System.out.println("SUCCESS! Questions can store multiple options!");
     }
 
     @Test
     public void checkQuestion(){
-        assertEquals(question_str,mult_question.getQuestion());
+        assertEquals(question_str, multi_question.getQuestion());
         System.out.println("SUCCESS! Questions value is stored properly");
     }
 }
