@@ -12,7 +12,7 @@
 
     <groupId>ca.group20</groupId>
     <artifactId>SYSC4806-Project</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.1</version>
     <name>SYSC4806-Project</name>
     <description>SYSC4806-Project</description>
     <properties>
