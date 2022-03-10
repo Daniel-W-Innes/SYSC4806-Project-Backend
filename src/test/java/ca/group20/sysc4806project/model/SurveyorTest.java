@@ -24,6 +24,7 @@ public class SurveyorTest {
         Survey test_survey1 = new Survey("Amazing Survey");
         test_surveyor.addSurvey(test_survey1);
         assertEquals(1,test_surveyor.getSurveys().size());
+        System.out.println("Success! Adds a survey to Surveyor Successfully!");
     }
 
     @Test
@@ -35,5 +36,6 @@ public class SurveyorTest {
         test_surveyor.addSurvey(test_survey2);
         test_surveyor.addSurvey(test_survey3);
         assertEquals(3,test_surveyor.getSurveys().size());
+        System.out.println("Success! Adds multiple Surveys to Surveyor Successfully!");
     }
 }
