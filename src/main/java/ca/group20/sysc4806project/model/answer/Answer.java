@@ -26,20 +26,20 @@ public class Answer {
         return id;
     }
 
-    public void setSurvey(Survey survey) {
-        this.survey = survey;
-    }
-
-    public void setQuestion(Question question) {
-        this.question = question;
-    }
-
     public Long getSurveyId() {
         return survey.getId();
     }
 
+    public void setSurvey(Survey survey) {
+        this.survey = survey;
+    }
+
     public Long getQuestionId() {
         return question.getId();
+    }
+
+    public void setQuestion(Question question) {
+        this.question = question;
     }
 
     @Override

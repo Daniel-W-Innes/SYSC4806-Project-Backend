@@ -24,10 +24,6 @@ public class Question {
         this.question = question;
     }
 
-    public void setSurvey(Survey survey) {
-        this.survey = survey;
-    }
-
     public Long getId() {
         return id;
     }
@@ -42,6 +38,10 @@ public class Question {
 
     public Long getSurveyId() {
         return survey.getId();
+    }
+
+    public void setSurvey(Survey survey) {
+        this.survey = survey;
     }
 
     @Override

@@ -23,16 +23,16 @@ public class MultipleChoiceQuestion extends Question {
         this.options = new HashSet<>();
     }
 
+    public Set<String> getOptions() {
+        return options;
+    }
+
     public boolean addOption(String option) {
         return options.add(option);
     }
 
     public boolean removeOption(String option) {
         return options.remove(option);
-    }
-
-    public Set<String> getOptions() {
-        return options;
     }
 
     public MultipleChoiceType getType() {
