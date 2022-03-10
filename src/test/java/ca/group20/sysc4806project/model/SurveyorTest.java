@@ -1,20 +1,20 @@
 package ca.group20.sysc4806project.model;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class SurveyorTest {
 
     private Surveyor test_surveyor;
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
         test_surveyor = new Surveyor("SquidGuy", "Erik", "Iuhas","####");
     }
 
-    @After
+    @AfterEach
     public void tearDown() throws Exception {
         test_surveyor = null;
     }

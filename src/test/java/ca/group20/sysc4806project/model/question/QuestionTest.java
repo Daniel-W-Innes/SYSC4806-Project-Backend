@@ -1,23 +1,22 @@
 package ca.group20.sysc4806project.model.question;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-
-import static org.junit.Assert.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class QuestionTest {
 
     private MultipleChoiceQuestion mult_question;
     private String question_str;
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
         question_str = "What time is it?";
         mult_question = new MultipleChoiceQuestion(question_str,MultipleChoiceType.MULTI_SELECTION);
     }
 
-    @After
+    @AfterEach
     public void tearDown() throws Exception {
         mult_question = null;
         question_str = null;

@@ -2,24 +2,24 @@ package ca.group20.sysc4806project.model.answer;
 
 import ca.group20.sysc4806project.model.Survey;
 import ca.group20.sysc4806project.model.question.Question;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class AnswerTest {
 
     private Question test_question;
     private  Survey test_survey;
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
          test_question = new Question("What day is it?");
          test_survey = new Survey("Cool Survey");
     }
 
-    @After
+    @AfterEach
     public void tearDown() throws Exception {
         test_question = null;
         test_survey = null;
