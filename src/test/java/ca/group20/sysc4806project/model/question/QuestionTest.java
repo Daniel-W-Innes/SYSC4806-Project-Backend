@@ -3,9 +3,11 @@ package ca.group20.sysc4806project.model.question;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+@SpringBootTest
 public class QuestionTest {
 
     private MultipleChoiceQuestion multi_question;
@@ -14,22 +16,20 @@ public class QuestionTest {
     @BeforeEach
     public void setUp() {
         question_str = "What time is it?";
-        multi_question = new MultipleChoiceQuestion(question_str,MultipleChoiceType.MULTI_SELECTION);
+        multi_question = new MultipleChoiceQuestion(question_str, MultipleChoiceType.MULTI_SELECTION);
     }
 
 
     @Test
-    public void addOptions(){
+    public void addOptions() {
         multi_question.addOption("1pm");
         multi_question.addOption("2pm");
         multi_question.addOption("7pm");
         assertEquals(3, multi_question.getOptions().size());
-        System.out.println("SUCCESS! Questions can store multiple options!");
     }
 
     @Test
-    public void checkQuestion(){
+    public void checkQuestion() {
         assertEquals(question_str, multi_question.getQuestion());
-        System.out.println("SUCCESS! Questions value is stored properly");
     }
 }
