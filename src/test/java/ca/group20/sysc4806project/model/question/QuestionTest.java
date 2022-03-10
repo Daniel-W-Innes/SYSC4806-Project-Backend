@@ -14,7 +14,7 @@ public class QuestionTest {
     @Before
     public void setUp() throws Exception {
         question_str = "What time is it?";
-        mult_question = new MultipleChoiceQuestion(question_str);
+        mult_question = new MultipleChoiceQuestion(question_str,MultipleChoiceType.MULTI_SELECTION);
     }
 
     @After
