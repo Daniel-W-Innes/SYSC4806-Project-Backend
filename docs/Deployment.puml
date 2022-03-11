@@ -1,0 +1,34 @@
+@startuml
+'https://plantuml.com/deployment-diagram
+
+actor User
+actor/ Developer
+component Browser
+cloud Heroku {
+ database Postgres
+ component Backend
+}
+
+cloud Github{
+ agent Git
+ cloud CDN{
+  component Frontend
+ }
+}
+cloud Travis_CI{
+ agent Build_server
+}
+
+User --> Browser: 1
+Browser <--> Frontend: 2
+Browser <--> Backend: 3
+Backend <--> Postgres: 4
+
+Developer -[#green]-> Git : 1
+Git <-[#green]-> Build_server: 2
+Git <-[#green]-> CDN: 3
+Git <-[#green]-> Heroku: 3
+
+
+
+@enduml
