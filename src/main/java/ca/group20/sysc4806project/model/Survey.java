@@ -16,12 +16,12 @@ public class Survey {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     private Surveyor surveyor;
 
     private String name;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "survey")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "survey")
     private List<Question> questions;
 
     public Survey(String name) {
