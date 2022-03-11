@@ -106,8 +106,6 @@ package answer{
     }
     class NumberAnswer extends Answer{
         - answer : int
-        - survey : Survey
-        - question : Question
         + getId() : Long
         + getSurveyId() : Long
         + setSurvey(survey : Survey) : void
