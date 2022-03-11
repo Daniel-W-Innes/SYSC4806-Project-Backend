@@ -6,6 +6,7 @@ import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -20,58 +21,58 @@ class SurveyorControllerTest {
 
     @Autowired
     private MockMvc mvc;
-    private static String surveyor_name = "Frank";
-    private Surveyor test_surveyor;
-    private Survey survey_1;
-    private Survey survey_2;
+    final private String surveyor_name = "Desha";
+    private String test_surveyor;
+    private String survey_1;
+    private String survey_2;
+    final private String controller_url = "/api/v0/surveyors/";
+    final private int HTTP_CREATED =  201;
+
 
     @BeforeEach
     void setUp(){
-
-        test_surveyor = new Surveyor(surveyor_name,surveyor_name,surveyor_name,"####");
-        survey_1 = new Survey("Survey_1");
-        survey_2 = new Survey("Survey_2");
+        test_surveyor = "{" +
+                "\"username\":\"" + surveyor_name + "\"" +
+                ",\"firstName\":\"" + surveyor_name + "\"" +
+                ",\"lastName\":\"" + surveyor_name + "\"" +
+                ",\"hashedPassword\":\"" + "####" + "\"" +
+                '}';
+        survey_1 = "{\"name\" : \"Survey1\"}";
+        survey_2 = "{\"name\" : \"Survey2\"}";
     }
 
     @Test
     @Order(1)
     void createSurveyor() throws Exception {
-        mvc.perform(post("/api/v0/surveyors").contentType(MediaType.APPLICATION_JSON)
-                .content(test_surveyor.toJson())).andExpect(status().is(201));
-        System.out.println("Successfully adds Surveyor to Database!");
+        mvc.perform(post(controller_url).contentType(MediaType.APPLICATION_JSON)
+                .content(test_surveyor)).andExpect(status().is(HTTP_CREATED));
     }
 
     @Test
     @Order(2)
     void getSurveyor() throws Exception{
-        mvc.perform(get("/api/v0/surveyors/" + test_surveyor.getUsername())).andExpect(status().isOk());
-        System.out.println("Successfully gets Surveyor from Database!");
+        mvc.perform(get(controller_url + surveyor_name)).andExpect(status().isOk());
     }
 
     @Test
     @Order(3)
     void createSurvey() throws Exception{
-        mvc.perform(post("/api/v0/surveyors/" + test_surveyor.getUsername() +"/surveys")
-                .contentType(MediaType.APPLICATION_JSON).content(survey_1.toJson())).andExpect(status().is(201));
-        mvc.perform(post("/api/v0/surveyors/" + test_surveyor.getUsername() +"/surveys")
-                .contentType(MediaType.APPLICATION_JSON).content(survey_2.toJson())).andExpect(status().is(201));
-        System.out.println("Successfully added two surveys to Surveyor!");
-
+        mvc.perform(post(controller_url + surveyor_name +"/surveys")
+                .contentType(MediaType.APPLICATION_JSON).content(survey_1)).andExpect(status().is(HTTP_CREATED));
+        mvc.perform(post(controller_url + surveyor_name +"/surveys")
+                .contentType(MediaType.APPLICATION_JSON).content(survey_2)).andExpect(status().is(HTTP_CREATED));
     }
 
     @Test
     @Order(4)
     void getSurveys() throws Exception{
-        mvc.perform(get("/api/v0/surveyors/" + test_surveyor.getUsername() +"/surveys")).andExpect(status().isOk());
-        System.out.println("Successfully gets multiple surveys from Database!");
-
+        mvc.perform(get(controller_url + surveyor_name +"/surveys")).andExpect(status().isOk());
     }
 
     @Test
     @Order(5)
     void getSurvey() throws Exception{
-        mvc.perform(get("/api/v0/surveyors/" + test_surveyor.getUsername() +"/survey")
-                .param("name",survey_1.getName())).andExpect(status().isOk());
-        System.out.println("Successfully gets multiple surveys from Database!");
+        mvc.perform(get(controller_url + surveyor_name +"/survey")
+                .param("name","survey_1")).andExpect(status().isOk());
     }
 }
