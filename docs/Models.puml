@@ -106,13 +106,8 @@ package answer{
     }
     class NumberAnswer extends Answer{
         - answer : int
-        - survey : Survey
-        - question : Question
-        + getId() : Long
-        + getSurveyId() : Long
-        + setSurvey(survey : Survey) : void
-        + getQuestionId() : Long
-        + setQuestion(question : Question) : void
+        + getAnswer() : int
+        + setAnswer(answer : int) : void
         + toString() : String
         + equals(o : Object) : boolean
         + hashCode() + int
@@ -121,7 +116,7 @@ package answer{
         - answer : String
         + TextAnswer(answer : String) : TextAnswer
         + getAnswer() : String
-        + setAnswer(answer)
+        + setAnswer(answer : String) : void
         + toString() : String
         + equals(o : Object) : boolean
         + hashCode() + int

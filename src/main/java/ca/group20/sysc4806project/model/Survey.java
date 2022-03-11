@@ -8,6 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * A survey stores a list of questions, a surveyor can have multiple surveys
+ */
 @Entity
 @NoArgsConstructor
 public class Survey {
@@ -61,10 +64,13 @@ public class Survey {
         return questions;
     }
 
-    public Boolean hasQuestion(Question question){
+    public Boolean hasQuestion(Question question) {
         return questions.contains(question);
     }
 
+    /**
+     * Converts Object to string
+     */
     @Override
     public String toString() {
         return "Survey{" +
@@ -75,6 +81,12 @@ public class Survey {
                 '}';
     }
 
+    /**
+     * Compares two objects to see if they are equal
+     *
+     * @param o the other object
+     * @return are they equal, boolean
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
