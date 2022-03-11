@@ -5,6 +5,9 @@ import lombok.NoArgsConstructor;
 import javax.persistence.Entity;
 import java.util.Objects;
 
+/**
+ * Extends Question, for creating a number question
+ */
 @Entity
 @NoArgsConstructor
 public class NumberQuestion extends Question {
@@ -34,6 +37,9 @@ public class NumberQuestion extends Question {
         this.min = min;
     }
 
+    /**
+     * Converts Object to string
+     */
     @Override
     public String toString() {
         return "NumberQuestion{" +
@@ -42,6 +48,12 @@ public class NumberQuestion extends Question {
                 '}';
     }
 
+    /**
+     * Compares two objects to see if they are equal
+     *
+     * @param o the other object
+     * @return are they equal, boolean
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

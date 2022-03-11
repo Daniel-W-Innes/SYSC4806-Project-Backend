@@ -8,6 +8,9 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 
+/**
+ * Use to connect to Surveyor Database
+ */
 @Service
 @RequiredArgsConstructor
 @Transactional
@@ -16,6 +19,12 @@ public class SurveyorServiceImpl implements SurveyorService {
 
     private final SurveyorRepo surveyorRepo;
 
+    /**
+     * Adds a new surveyor to the database
+     *
+     * @param surveyor surveyor to be added
+     * @return new surveyor
+     */
     @Override
     public Surveyor saveSurveyor(Surveyor surveyor) {
         Surveyor newSurveyor = surveyorRepo.save(surveyor);
@@ -23,6 +32,12 @@ public class SurveyorServiceImpl implements SurveyorService {
         return newSurveyor;
     }
 
+    /**
+     * get surveyor from the database based off the username given
+     *
+     * @param surveyorUsername a surveyor's user name
+     * @return surveyor table from the database
+     */
     @Override
     public Surveyor getSurveyor(String surveyorUsername) {
         log.info("Fetching Surveyor " + surveyorUsername);
