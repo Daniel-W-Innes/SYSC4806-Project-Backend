@@ -13,7 +13,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import util.ToJson;
 
 import java.util.List;
-import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -87,8 +86,8 @@ class SurveyorControllerTest {
         mvc.perform(post(controller_url + USERNAME + "/surveys")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(surveyJson(name, List.of(
-                        new ToJson.Question(question1,"SINGLE_SELECTION"),
-                        new ToJson.Question(question2,max,min,"MULTI_SELECTION" ),
+                        new ToJson.Question(question1),
+                        new ToJson.Question(question2,max,min),
                         new ToJson.Question(question3,List.of(option1,option2),"RATING" ))
                 ))).andExpect(status().isCreated());
     }

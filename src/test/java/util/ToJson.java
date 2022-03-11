@@ -15,8 +15,8 @@ public class ToJson {
     public static class Question{
         private final String json;
 
-        public Question(String question, String type) {
-            json = "{\"question\":\"" +  question + "\", \"type\":\""+type+"\"}";
+        public Question(String question) {
+            json = "{\"question\":\"" +  question + "\"}";
         }
 
         public Question(String question, List<String> options, String type ) {
@@ -37,11 +37,10 @@ public class ToJson {
             json = stringBuilder.toString();
         }
 
-        public Question(String question, int max, int min, String type) {
+        public Question(String question, int max, int min) {
             json = "{\"question\":\"" +  question + "\"," +
                     "\"max\":" +  max + "," +
-                    "\"min\":" +  min + "," +
-                    "\"type\":\"" +  type + "\"}";
+                    "\"min\":" +  min + "}";
         }
     }
     public static String surveyJson(String name, List<Question> questions){

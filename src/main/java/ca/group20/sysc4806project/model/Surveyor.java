@@ -24,7 +24,7 @@ public class Surveyor {
     private String lastName;
     private String hashedPassword;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "surveyor")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "surveyor", cascade = CascadeType.REMOVE)
     private List<Survey> surveys;
 
     public Surveyor(String username, String firstName, String lastName, String hashedPassword) {

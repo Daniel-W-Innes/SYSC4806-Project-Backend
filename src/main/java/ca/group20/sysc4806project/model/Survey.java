@@ -19,12 +19,12 @@ public class Survey {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     private Surveyor surveyor;
 
     private String name;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "survey")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "survey", cascade = CascadeType.REMOVE)
     private List<Question> questions;
 
     public Survey(String name) {
