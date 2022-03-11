@@ -21,6 +21,7 @@ public class SurveyServiceImpl implements SurveyService {
 
     /**
      * Adds a new survey to the database
+     *
      * @param survey survey to be added
      * @return newly created survey
      */

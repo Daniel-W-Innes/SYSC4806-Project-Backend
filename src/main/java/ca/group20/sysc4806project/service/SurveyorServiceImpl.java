@@ -21,6 +21,7 @@ public class SurveyorServiceImpl implements SurveyorService {
 
     /**
      * Adds a new surveyor to the database
+     *
      * @param surveyor surveyor to be added
      * @return new surveyor
      */
@@ -33,6 +34,7 @@ public class SurveyorServiceImpl implements SurveyorService {
 
     /**
      * get surveyor from the database based off the username given
+     *
      * @param surveyorUsername a surveyor's user name
      * @return surveyor table from the database
      */

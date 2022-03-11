@@ -38,6 +38,7 @@ public class NumberAnswer extends Answer { // answer to a number question
 
     /**
      * Compares two objects to see if they are equal
+     *
      * @param o the other object
      * @return are they equal, boolean
      */

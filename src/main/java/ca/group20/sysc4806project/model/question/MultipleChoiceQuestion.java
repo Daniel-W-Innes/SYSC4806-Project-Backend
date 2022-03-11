@@ -59,6 +59,7 @@ public class MultipleChoiceQuestion extends Question {
 
     /**
      * Compares two objects to see if they are equal
+     *
      * @param o the other object
      * @return are they equal, boolean
      */
@@ -67,7 +68,7 @@ public class MultipleChoiceQuestion extends Question {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         MultipleChoiceQuestion multi_ques = (MultipleChoiceQuestion) o;
-        return Objects.equals(options, multi_ques.getOptions())  && Objects.equals(type, multi_ques.getType());
+        return Objects.equals(options, multi_ques.getOptions()) && Objects.equals(type, multi_ques.getType());
     }
 
     @Override

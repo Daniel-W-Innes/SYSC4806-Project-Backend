@@ -64,7 +64,7 @@ public class Survey {
         return questions;
     }
 
-    public Boolean hasQuestion(Question question){
+    public Boolean hasQuestion(Question question) {
         return questions.contains(question);
     }
 
@@ -83,6 +83,7 @@ public class Survey {
 
     /**
      * Compares two objects to see if they are equal
+     *
      * @param o the other object
      * @return are they equal, boolean
      */

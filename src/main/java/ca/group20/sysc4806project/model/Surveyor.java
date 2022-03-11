@@ -80,7 +80,7 @@ public class Surveyor {
     }
 
     public boolean addSurvey(Survey s) {
-         return surveys.add(s);
+        return surveys.add(s);
     }
 
     /**
@@ -100,6 +100,7 @@ public class Surveyor {
 
     /**
      * Compares two objects to see if they are equal
+     *
      * @param o the other object
      * @return are they equal, boolean
      */

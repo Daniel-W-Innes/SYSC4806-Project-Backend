@@ -50,6 +50,7 @@ public class NumberQuestion extends Question {
 
     /**
      * Compares two objects to see if they are equal
+     *
      * @param o the other object
      * @return are they equal, boolean
      */

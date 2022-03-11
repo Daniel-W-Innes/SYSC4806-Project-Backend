@@ -29,6 +29,7 @@ public class SurveyorController {
 
     /**
      * Creates a new surveyor to be added to the database
+     *
      * @param surveyor new surveyor to be created
      * @return created surveyor
      */
@@ -49,6 +50,7 @@ public class SurveyorController {
 
     /**
      * Using a given surveyor's name, return the surveyor matching that name
+     *
      * @param surveyorName surveyor's name given as a string
      * @return a surveyor
      */
@@ -64,8 +66,9 @@ public class SurveyorController {
 
     /**
      * Creates a survey under a given surveyor's name.
+     *
      * @param surveyorName surveyor's name given as a string
-     * @param survey the survey being created
+     * @param survey       the survey being created
      * @return the newly created survey
      */
     @PostMapping("/{surveyorName}/surveys")
@@ -89,6 +92,7 @@ public class SurveyorController {
 
     /**
      * Using a given surveyor's name, return the list of surveys assigned to that surveyor
+     *
      * @param surveyorName surveyor's name given as a string
      * @return list of surveys
      */
@@ -105,8 +109,9 @@ public class SurveyorController {
 
     /**
      * Using a given surveyor's name and a survey name, return the survey with matching name and surveyor name
+     *
      * @param surveyorName surveyor's name given as a string
-     * @param name The name of the survey as a string
+     * @param name         The name of the survey as a string
      * @return a survey
      */
     @GetMapping("/{surveyorName}/survey")
