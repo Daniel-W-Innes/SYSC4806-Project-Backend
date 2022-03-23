@@ -26,6 +26,12 @@ public class MultipleChoiceQuestion extends Question {
         this.options = new HashSet<>();
     }
 
+    public MultipleChoiceQuestion(String question, MultipleChoiceType type, Set<String> options) {
+        super(question);
+        this.type = type;
+        this.options = options;
+    }
+
     public Set<String> getOptions() {
         return options;
     }
