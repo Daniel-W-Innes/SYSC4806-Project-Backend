@@ -1,7 +1,6 @@
 package ca.group20.sysc4806project.model.answer;
 
 import ca.group20.sysc4806project.model.Survey;
-import ca.group20.sysc4806project.model.question.Question;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -22,9 +21,6 @@ public class Answer {
     @ManyToOne(fetch = FetchType.LAZY)
     private Survey survey;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Question question;
-
     public Long getId() {
         return id;
     }
@@ -37,14 +33,6 @@ public class Answer {
         this.survey = survey;
     }
 
-    public Long getQuestionId() {
-        return question.getId();
-    }
-
-    public void setQuestion(Question question) {
-        this.question = question;
-    }
-
     /**
      * Converts Object to string
      */
@@ -53,7 +41,6 @@ public class Answer {
         return "Answer{" +
                 "id=" + id +
                 ", surveyId=" + getSurveyId() +
-                ", questionId=" + getQuestionId() +
                 '}';
     }
 
@@ -69,11 +56,11 @@ public class Answer {
         if (o == null || getClass() != o.getClass()) return false;
         Answer ans = (Answer) o;
         if (Objects.equals(id, ans.getId())) return true;
-        return Objects.equals(getSurveyId(), ans.getSurveyId()) && Objects.equals(getQuestionId(), ans.getQuestionId());
+        return Objects.equals(getSurveyId(), ans.getSurveyId());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, getSurveyId(), getQuestionId());
+        return Objects.hash(id, getSurveyId());
     }
 }

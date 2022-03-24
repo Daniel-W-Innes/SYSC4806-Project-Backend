@@ -1,7 +1,6 @@
 package ca.group20.sysc4806project.model.answer;
 
 import ca.group20.sysc4806project.model.Survey;
-import ca.group20.sysc4806project.model.question.Question;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -10,12 +9,10 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 public class AnswerTest {
 
-    private Question test_question;
     private Survey test_survey;
 
     @BeforeEach
     public void setUp() {
-        test_question = new Question("What day is it?");
         test_survey = new Survey("Cool Survey");
     }
 
@@ -24,13 +21,6 @@ public class AnswerTest {
         TextAnswer test_answer = new TextAnswer();
         test_answer.setSurvey(test_survey);
         assertEquals(test_survey.getId(), test_answer.getSurveyId());
-    }
-
-    @Test
-    public void setQuestion() {
-        TextAnswer test_answer = new TextAnswer();
-        test_answer.setQuestion(test_question);
-        assertEquals(test_question.getId(), test_answer.getQuestionId());
     }
 
     @Test

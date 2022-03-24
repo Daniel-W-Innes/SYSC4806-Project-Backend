@@ -13,7 +13,7 @@ import java.util.Set;
  */
 @Entity
 @NoArgsConstructor
-public class MultipleChoiceQuestion extends Question {
+public class MultipleChoiceQuestion extends TextAnswerable {
 
     @ElementCollection
     private Set<String> options;
