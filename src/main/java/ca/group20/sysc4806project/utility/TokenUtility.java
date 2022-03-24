@@ -29,7 +29,9 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @Slf4j
 public class TokenUtility {
 
-    private final Algorithm algorithm = Algorithm.HMAC256("SECRET".getBytes()); // TODO NEED TO ENCRYPT SECRET
+    @Value("${JWT_SECRET ?: 'Some random secret to be used for testing only. This allows for the pre-generation of testing JWT.'}")
+    private String JWTSecret;
+    private final Algorithm algorithm = Algorithm.HMAC256(JWTSecret.getBytes());
 
     public void createAccessToken(String username, List<String> roles, Map<String, String> tokens) {
         String access_token = JWT.create()
