@@ -1,7 +1,6 @@
 package ca.group20.sysc4806project.service;
 
 import ca.group20.sysc4806project.model.Survey;
-import ca.group20.sysc4806project.model.question.Question;
 
 /**
  * Use to connect to Survey Database
@@ -17,12 +16,4 @@ public interface SurveyService {
      * @return newly created survey
      */
     Survey saveSurvey(Survey survey);
-
-    /**
-     * Adds a new question to the database
-     *
-     * @param question question to be added
-     * @return newly created question
-     */
-    Question saveQuestion(Question question);
 }

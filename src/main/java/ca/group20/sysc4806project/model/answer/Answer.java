@@ -1,6 +1,7 @@
 package ca.group20.sysc4806project.model.answer;
 
-import ca.group20.sysc4806project.model.Survey;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -12,25 +13,19 @@ import java.util.Objects;
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 @NoArgsConstructor
-public class Answer {
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "type")
+@JsonSubTypes({
+        @JsonSubTypes.Type(value = TextAnswer.class, name = "text"),
+        @JsonSubTypes.Type(value = NumberAnswer.class, name = "number"),
+})
+public abstract class Answer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Survey survey;
-
     public Long getId() {
         return id;
-    }
-
-    public Long getSurveyId() {
-        return survey.getId();
-    }
-
-    public void setSurvey(Survey survey) {
-        this.survey = survey;
     }
 
     /**
@@ -40,7 +35,6 @@ public class Answer {
     public String toString() {
         return "Answer{" +
                 "id=" + id +
-                ", surveyId=" + getSurveyId() +
                 '}';
     }
 
@@ -55,12 +49,11 @@ public class Answer {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Answer ans = (Answer) o;
-        if (Objects.equals(id, ans.getId())) return true;
-        return Objects.equals(getSurveyId(), ans.getSurveyId());
+        return Objects.equals(id, ans.getId());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, getSurveyId());
+        return Objects.hash(id);
     }
 }

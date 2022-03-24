@@ -9,19 +9,6 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 public class AnswerTest {
 
-    private Survey test_survey;
-
-    @BeforeEach
-    public void setUp() {
-        test_survey = new Survey("Cool Survey");
-    }
-
-    @Test
-    public void setSurvey() {
-        TextAnswer test_answer = new TextAnswer();
-        test_answer.setSurvey(test_survey);
-        assertEquals(test_survey.getId(), test_answer.getSurveyId());
-    }
 
     @Test
     public void setAnswer() {

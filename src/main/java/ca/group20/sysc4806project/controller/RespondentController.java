@@ -23,7 +23,7 @@ public class RespondentController {
     private final AnswerService answerService;
 
     @PostMapping("/answer")
-    public ResponseEntity<?> create(@Valid @RequestBody Answer answer) {
+    public ResponseEntity<?> createAnswer(@Valid @RequestBody Answer answer) {
         Answer newAnswer = answerService.saveAnswer(answer);
         URI uri = URI.create(
                 ServletUriComponentsBuilder
