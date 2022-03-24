@@ -1,6 +1,7 @@
 package ca.group20.sysc4806project.model;
 
 import ca.group20.sysc4806project.model.answer.Answer;
+import ca.group20.sysc4806project.model.question.Question;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -20,7 +21,7 @@ public class Respondent {
     @ManyToOne(fetch = FetchType.LAZY)
     private Survey survey;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "respondent")
+    @OneToMany(fetch = FetchType.LAZY)
     private List<Answer> answers_list;
 
     public Respondent(Survey survey) {
@@ -40,6 +41,7 @@ public class Respondent {
         return id;
     }
 
+
     public void setSurvey(Survey survey) {
         this.survey = survey;
     }
@@ -54,6 +56,14 @@ public class Respondent {
 
     public void removeAnswer(Answer answer){
         answers_list.add(answer);
+    }
+
+    public Boolean compareAnswer(Answer answer){
+        for(Answer resp_answer : answers_list){
+            if (resp_answer.getQuestionId() == answer.getQuestionId()){
+            }
+        }
+        return true;
     }
 
     @Override
