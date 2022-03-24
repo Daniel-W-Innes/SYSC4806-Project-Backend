@@ -7,6 +7,7 @@ import ca.group20.sysc4806project.model.Survey;
  */
 public interface SurveyService {
     Survey findBySurveyName(String surveyName);
+
     Survey findSurveyById(long surveyId);
 
     /**

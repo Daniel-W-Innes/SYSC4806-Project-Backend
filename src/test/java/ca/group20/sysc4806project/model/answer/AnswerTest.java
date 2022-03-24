@@ -1,7 +1,5 @@
 package ca.group20.sysc4806project.model.answer;
 
-import ca.group20.sysc4806project.model.Survey;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
