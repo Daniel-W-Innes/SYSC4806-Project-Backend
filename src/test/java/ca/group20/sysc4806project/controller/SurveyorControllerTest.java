@@ -14,6 +14,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @AutoConfigureMockMvc
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+@TestClassOrder(ClassOrderer.OrderAnnotation.class)
+@Order(1)
 class SurveyorControllerTest {
     private final static String SURVEYOR_NAME = "Desha";
     private final static String CONTROLLER_URL = "/api/v0/surveyors/";
