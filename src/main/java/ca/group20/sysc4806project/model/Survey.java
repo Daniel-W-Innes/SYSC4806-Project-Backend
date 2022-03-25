@@ -1,5 +1,6 @@
 package ca.group20.sysc4806project.model;
 
+import ca.group20.sysc4806project.model.answer.Answer;
 import ca.group20.sysc4806project.model.question.Question;
 import lombok.NoArgsConstructor;
 
@@ -63,6 +64,16 @@ public class Survey {
     public boolean addRespondents(Respondent resp) { return respondents.add(resp); }
 
     public boolean removeRespondent(Respondent resp){ return respondents.remove(resp); }
+
+    public List<Respondent> sameAnswerRespondentList(Answer ans){
+        List<Respondent> same_answer = new ArrayList<>();
+        for(Respondent resp : respondents){
+            if(resp.compareAnswer(ans)){
+                same_answer.add(resp);
+            }
+        }
+        return same_answer;
+    }
 
     public boolean addQuestion(Question q) {
         return questions.add(q);

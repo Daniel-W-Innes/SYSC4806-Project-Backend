@@ -60,10 +60,13 @@ public class Respondent {
 
     public Boolean compareAnswer(Answer answer){
         for(Answer resp_answer : answers_list){
-            if (resp_answer.getQuestionId() == answer.getQuestionId()){
+            if (Objects.equals(resp_answer.getQuestionId(), answer.getQuestionId())){
+                if(resp_answer.equals(answer)){
+                    return true;
+                }
             }
         }
-        return true;
+        return false;
     }
 
     @Override

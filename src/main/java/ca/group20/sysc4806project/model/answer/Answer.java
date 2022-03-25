@@ -28,6 +28,8 @@ public abstract class Answer {
         return id;
     }
 
+    public abstract Long getQuestionId();
+
     /**
      * Converts Object to string
      */
