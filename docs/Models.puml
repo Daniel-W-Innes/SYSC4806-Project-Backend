@@ -29,6 +29,7 @@ class Survey{
     - id : Long
     - surveyor : Surveyor
     - name : String
+    - respondents: List<Respondent>
     - questions : List<Question>
     + Survey(name : String): Survey
     + getId() : Long
@@ -36,6 +37,9 @@ class Survey{
     + setName(name : String) : void
     + setSurveyor(surveyor : Surveyor) : Surveyor
     + getSurveyorId() : Long
+    + addRespondent(resp: Respondent): boolean
+    + getRespondents(): List<Respondent>
+    + removeRespondent(resp: Respondent): boolean
     + getQuestions() : List<Question>
     + addQuestion(q : Question) : boolean
     + removeQuestion(q : Question) : boolean
@@ -44,8 +48,31 @@ class Survey{
     + hashCode() + int
 }
 
+class Respondent{
+    - id : Long
+    - answerList : List<Answer>
+    + Respondent(): Respondent
+    + getId() : Long
+    + setAnswers(answers: List<Answer>): void
+    + addAnswer(answer: Answer): void
+    + removeAnswer(answer: Answer): void
+    + compareAnswer(answer: Answer): Boolean
+    + toString() : String
+    + equals(o : Object) : boolean
+    + hashCode() + int
+}
+
+class Role {
+    - id: Long
+    - name: String
+    + Role(name: String): Role
+    + getId(): Long
+    + getName(): String
+    + setName(name: String): void
+}
+
 package question{
-    class Question{
+    abstract class Question{
         - id : Long
         - survey : Survey
         - question : String
@@ -74,9 +101,8 @@ package question{
     enum MultipleChoiceType{
         SINGLE_SELECTION
         MULTI_SELECTION
-        RATING
     }
-    class MultipleChoiceQuestion extends Question{
+    class MultipleChoiceQuestion extends TextAnswerable{
         - options : Set<String>
         - type : MultipleChoiceType
         + MultipleChoiceQuestion(question : String, type : MultipleChoiceType) : MultipleChoiceQuestion
@@ -89,34 +115,40 @@ package question{
         + equals(o : Object) : boolean
         + hashCode() + int
     }
+    class TextAnswerable extends Question {
+        + TextAnswerable(question: String): TextAnswerable
+    }
 }
 package answer{
-    class Answer{
+    abstract class Answer{
         - id : Long
         - survey : Survey
-        - question : Question
         + getId() : Long
         + getSurveyId() : Long
         + setSurvey(survey : Survey) : void
-        + getQuestionId() : Long
-        + setQuestion(question : Question) : void
         + toString() : String
         + equals(o : Object) : boolean
         + hashCode() + int
     }
     class NumberAnswer extends Answer{
         - answer : int
+        - question : NumberQuestion
         + getAnswer() : int
         + setAnswer(answer : int) : void
+        + getQuestionId() : Long
+        + setQuestion(question : Question) : void
         + toString() : String
         + equals(o : Object) : boolean
         + hashCode() + int
     }
     class TextAnswer extends Answer{
         - answer : String
+        - question : TextAnswerable
         + TextAnswer(answer : String) : TextAnswer
         + getAnswer() : String
         + setAnswer(answer : String) : void
+        + getQuestionId() : Long
+        + setQuestion(question : Question) : void
         + toString() : String
         + equals(o : Object) : boolean
         + hashCode() + int
@@ -125,9 +157,10 @@ package answer{
 
 Surveyor "1" o-- "0..*" Survey
 Survey "1" *-- "1..*" Question
-Answer "0..*" *-- "1" Survey
-Answer "0..*" *-- "1" Question
+TextAnswer "0..*" *-- "1" TextAnswerable
+NumberAnswer "0..*" *-- "1" NumberQuestion
 MultipleChoiceQuestion "0..*" *-- "1" MultipleChoiceType
+Respondent "1" *-- "1..*" Answer
 
 
 @enduml
