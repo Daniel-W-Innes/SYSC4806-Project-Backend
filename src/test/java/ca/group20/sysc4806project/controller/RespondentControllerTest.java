@@ -14,7 +14,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 @Order(2)
 public class RespondentControllerTest {
-    private final static String CONTROLLER_URL = "/api/v0/respondents/";
+    private final static String CONTROLLER_URL = "/api/v0/respondents";
 
     @Autowired
     private MockMvc mvc;

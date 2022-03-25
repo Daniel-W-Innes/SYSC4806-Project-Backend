@@ -10,6 +10,8 @@ import com.auth0.jwt.interfaces.DecodedJWT;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.experimental.UtilityClass;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -29,8 +31,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @Slf4j
 public class TokenUtility {
 
-    @Value("${JWT_SECRET ?: 'Some random secret to be used for testing only. This allows for the pre-generation of testing JWT.'}")
-    private String JWTSecret;
+    String JWTSecret = System.getenv("JWT_SECRET") == null ? "secret" : System.getenv("JWT_SECRET");
     private final Algorithm algorithm = Algorithm.HMAC256(JWTSecret.getBytes());
 
     public void createAccessToken(String username, List<String> roles, Map<String, String> tokens) {

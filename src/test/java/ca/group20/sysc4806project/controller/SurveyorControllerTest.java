@@ -18,7 +18,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @Order(1)
 class SurveyorControllerTest {
     private final static String SURVEYOR_NAME = "Desha";
-    private final static String CONTROLLER_URL = "/api/v0/surveyors/";
+    private final static String CONTROLLER_URL = "/api/v0/surveyors";
 
     @Autowired
     private MockMvc mvc;
@@ -49,15 +49,16 @@ class SurveyorControllerTest {
     @Test
     @Order(2)
     void getSurveyor() throws Exception {
-        mvc.perform(get(CONTROLLER_URL + SURVEYOR_NAME)).andExpect(status().isOk());
+        mvc.perform(get(CONTROLLER_URL +"/"+ SURVEYOR_NAME)).andExpect(status().isOk());
     }
 
     @Test
     @Order(3)
     void createSurveyWithQuestions() throws Exception {
-        mvc.perform(post(CONTROLLER_URL + SURVEYOR_NAME + "/surveys")
+        mvc.perform(post(CONTROLLER_URL +"/"+ SURVEYOR_NAME + "/surveys")
                 .contentType(MediaType.APPLICATION_JSON).content(survey_with_questions)).andExpect(status().isCreated());
     }
+
     @Test
     @Order(4)
     void addQuestions() throws Exception {
@@ -72,13 +73,13 @@ class SurveyorControllerTest {
     @Test
     @Order(6)
     void getSurveys() throws Exception {
-        mvc.perform(get(CONTROLLER_URL + SURVEYOR_NAME + "/surveys")).andExpect(status().isOk());
+        mvc.perform(get(CONTROLLER_URL +"/"+ SURVEYOR_NAME + "/surveys")).andExpect(status().isOk());
     }
 
     @Test
     @Order(7)
     void getSurvey() throws Exception {
-        mvc.perform(get(CONTROLLER_URL + SURVEYOR_NAME + "/survey")
+        mvc.perform(get(CONTROLLER_URL +"/"+ SURVEYOR_NAME + "/survey")
                 .param("name", "survey_1")).andExpect(status().isOk());
     }
 }
