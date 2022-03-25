@@ -6,6 +6,10 @@ import ca.group20.sysc4806project.model.Survey;
  * Use to connect to Survey Database
  */
 public interface SurveyService {
+    Survey findBySurveyName(String surveyName);
+
+    Survey findSurveyById(long surveyId);
+
     /**
      * Adds a new survey to the database
      *

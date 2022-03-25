@@ -32,6 +32,11 @@ public class Survey {
         this.questions = new ArrayList<>();
     }
 
+    public Survey(String name, List<Question> questions) {
+        this.name = name;
+        this.questions = questions;
+    }
+
     public Long getId() {
         return id;
     }

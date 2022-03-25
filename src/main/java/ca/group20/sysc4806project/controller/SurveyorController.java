@@ -4,6 +4,8 @@ import ca.group20.sysc4806project.exception.InvalidRoleException;
 import ca.group20.sysc4806project.exception.SurveyorAlreadyExistsException;
 import ca.group20.sysc4806project.model.Survey;
 import ca.group20.sysc4806project.model.Surveyor;
+import ca.group20.sysc4806project.model.question.Question;
+import ca.group20.sysc4806project.service.QuestionService;
 import ca.group20.sysc4806project.service.SurveyService;
 import ca.group20.sysc4806project.service.SurveyorService;
 import lombok.RequiredArgsConstructor;
@@ -28,6 +30,7 @@ public class SurveyorController {
 
     private final SurveyorService surveyorService;
     private final SurveyService surveyService;
+    private final QuestionService questionService;
 
     /**
      * Creates a new surveyor to be added to the database
@@ -91,6 +94,32 @@ public class SurveyorController {
             } else {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No Surveyor found with username: " + surveyorName);
             }
+        } catch (Exception e) { // add new Exception for Survey already exists or survey already added
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
+    }
+
+    /**
+     * Add a text question to an existing survey.
+     *
+     * @param surveyId survey's ID
+     * @param question question to save
+     * @return the newly created question
+     */
+    @PostMapping("/survey/{surveyId}/questions")
+    public ResponseEntity<?> createQuestion(@PathVariable("surveyId") long surveyId,
+                                            @Valid @RequestBody Question question) {
+        try {
+            Survey survey = surveyService.findSurveyById(surveyId);
+            question.setSurvey(survey);
+            survey.addQuestion(question);
+            Question newQuestion = questionService.saveQuestion(question);
+            URI uri = URI.create(
+                    ServletUriComponentsBuilder
+                            .fromCurrentContextPath()
+                            .path("/api/v0/surveyors/survey/" + surveyId + "/questions")
+                            .toUriString());
+            return ResponseEntity.created(uri).body(newQuestion);
         } catch (Exception e) { // add new Exception for Survey already exists or survey already added
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
