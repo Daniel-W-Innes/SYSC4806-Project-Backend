@@ -1,10 +1,11 @@
 package ca.group20.sysc4806project.controller;
 
+import ca.group20.sysc4806project.exception.InvalidRoleException;
+import ca.group20.sysc4806project.exception.SurveyorAlreadyExistsException;
 import ca.group20.sysc4806project.model.Survey;
 import ca.group20.sysc4806project.model.Surveyor;
-import ca.group20.sysc4806project.model.question.MultipleChoiceQuestion;
-import ca.group20.sysc4806project.model.question.NumberQuestion;
 import ca.group20.sysc4806project.model.question.Question;
+import ca.group20.sysc4806project.service.QuestionService;
 import ca.group20.sysc4806project.service.SurveyService;
 import ca.group20.sysc4806project.service.SurveyorService;
 import lombok.RequiredArgsConstructor;
@@ -29,6 +30,7 @@ public class SurveyorController {
 
     private final SurveyorService surveyorService;
     private final SurveyService surveyService;
+    private final QuestionService questionService;
 
     /**
      * Creates a new surveyor to be added to the database
@@ -46,8 +48,8 @@ public class SurveyorController {
                             .path("/api/v0/surveyors")
                             .toUriString());
             return ResponseEntity.created(uri).body(newSurveyor);
-        } catch (Exception e) { // add new Exception for Surveyor already exists
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        } catch (SurveyorAlreadyExistsException | InvalidRoleException saee) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(saee.getMessage());
         }
     }
 
@@ -59,11 +61,11 @@ public class SurveyorController {
      */
     @GetMapping("/{surveyorName}")
     public ResponseEntity<?> get(@PathVariable("surveyorName") String surveyorName) {
-        try {
-            Surveyor surveyor = surveyorService.getSurveyor(surveyorName);
+        Surveyor surveyor = surveyorService.getSurveyor(surveyorName);
+        if (surveyor != null) {
             return ResponseEntity.status(HttpStatus.OK).body(surveyor);
-        } catch (Exception e) { // add new exception
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No Surveyor found with username: " + surveyorName);
         }
     }
 
@@ -79,15 +81,19 @@ public class SurveyorController {
                                           @Valid @RequestBody Survey survey) {
         try {
             Surveyor surveyor = surveyorService.getSurveyor(surveyorName);
-            survey.setSurveyor(surveyor);
-            surveyor.addSurvey(survey);
-            Survey newSurvey = surveyService.saveSurvey(survey);
-            URI uri = URI.create(
-                    ServletUriComponentsBuilder
-                            .fromCurrentContextPath()
-                            .path("/api/v0/surveyors/" + surveyorName + "/surveys")
-                            .toUriString());
-            return ResponseEntity.created(uri).body(newSurvey);
+            if (surveyor != null) {
+                survey.setSurveyor(surveyor);
+                surveyor.addSurvey(survey);
+                Survey newSurvey = surveyService.saveSurvey(survey);
+                URI uri = URI.create(
+                        ServletUriComponentsBuilder
+                                .fromCurrentContextPath()
+                                .path("/api/v0/surveyors/" + surveyorName + "/surveys")
+                                .toUriString());
+                return ResponseEntity.created(uri).body(newSurvey);
+            } else {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No Surveyor found with username: " + surveyorName);
+            }
         } catch (Exception e) { // add new Exception for Survey already exists or survey already added
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
@@ -96,74 +102,22 @@ public class SurveyorController {
     /**
      * Add a text question to an existing survey.
      *
-     * @param surveyId     survey's ID
-     * @param question     question to save
+     * @param surveyId survey's ID
+     * @param question question to save
      * @return the newly created question
      */
-    @PostMapping("/survey/{surveyId}/textQuestion")
-    public ResponseEntity<?> createTextQuestion(@PathVariable("surveyId") long surveyId,
-                                                @Valid @RequestBody Question question) {
+    @PostMapping("/survey/{surveyId}/questions")
+    public ResponseEntity<?> createQuestion(@PathVariable("surveyId") long surveyId,
+                                            @Valid @RequestBody Question question) {
         try {
             Survey survey = surveyService.findSurveyById(surveyId);
             question.setSurvey(survey);
             survey.addQuestion(question);
-            Question newQuestion = surveyService.saveQuestion(question);
+            Question newQuestion = questionService.saveQuestion(question);
             URI uri = URI.create(
                     ServletUriComponentsBuilder
                             .fromCurrentContextPath()
-                            .path("/api/v0/surveyors/survey/" + surveyId + "/textQuestion")
-                            .toUriString());
-            return ResponseEntity.created(uri).body(newQuestion);
-        } catch (Exception e) { // add new Exception for Survey already exists or survey already added
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
-        }
-    }
-
-    /**
-     * Add a number question to an existing survey.
-     *
-     * @param surveyId     survey's ID
-     * @param question     question to save
-     * @return the newly created question
-     */
-    @PostMapping("/survey/{surveyId}/numberQuestion")
-    public ResponseEntity<?> createNumberQuestion(@PathVariable("surveyId") long surveyId,
-                                                @Valid @RequestBody NumberQuestion question) {
-        try {
-            Survey survey = surveyService.findSurveyById(surveyId);
-            question.setSurvey(survey);
-            survey.addQuestion(question);
-            Question newQuestion = surveyService.saveQuestion(question);
-            URI uri = URI.create(
-                    ServletUriComponentsBuilder
-                            .fromCurrentContextPath()
-                            .path("/api/v0/surveyors/survey/" + surveyId + "/numberQuestion")
-                            .toUriString());
-            return ResponseEntity.created(uri).body(newQuestion);
-        } catch (Exception e) { // add new Exception for Survey already exists or survey already added
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
-        }
-    }
-
-    /**
-     * Add a multiple choice question to an existing survey.
-     *
-     * @param surveyId     survey's ID
-     * @param question     question to save
-     * @return the newly created question
-     */
-    @PostMapping("/survey/{surveyId}/multipleChoiceQuestion")
-    public ResponseEntity<?> createNumberQuestion(@PathVariable("surveyId") long surveyId,
-                                                  @Valid @RequestBody MultipleChoiceQuestion question) {
-        try {
-            Survey survey = surveyService.findSurveyById(surveyId);
-            question.setSurvey(survey);
-            survey.addQuestion(question);
-            Question newQuestion = surveyService.saveQuestion(question);
-            URI uri = URI.create(
-                    ServletUriComponentsBuilder
-                            .fromCurrentContextPath()
-                            .path("/api/v0/surveyors/survey/" + surveyId + "/multipleChoiceQuestion")
+                            .path("/api/v0/surveyors/survey/" + surveyId + "/questions")
                             .toUriString());
             return ResponseEntity.created(uri).body(newQuestion);
         } catch (Exception e) { // add new Exception for Survey already exists or survey already added
@@ -181,8 +135,12 @@ public class SurveyorController {
     public ResponseEntity<?> getSurveys(@PathVariable("surveyorName") String surveyorName) {
         try {
             Surveyor surveyor = surveyorService.getSurveyor(surveyorName);
-            List<Survey> surveys = surveyor.getSurveys();
-            return ResponseEntity.status(HttpStatus.OK).body(surveys);
+            if (surveyor != null) {
+                List<Survey> surveys = surveyor.getSurveys();
+                return ResponseEntity.status(HttpStatus.OK).body(surveys);
+            } else {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No Surveyor found with username: " + surveyorName);
+            }
         } catch (Exception e) { // add new exception
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
@@ -199,7 +157,11 @@ public class SurveyorController {
     public ResponseEntity<?> getSurvey(@PathVariable("surveyorName") String surveyorName, @RequestParam String name) {
         try {
             Surveyor surveyor = surveyorService.getSurveyor(surveyorName);
-            return ResponseEntity.status(HttpStatus.OK).body(surveyor.getSurvey(name));
+            if (surveyor != null) {
+                return ResponseEntity.status(HttpStatus.OK).body(surveyor.getSurvey(name));
+            } else {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No Surveyor found with username: " + surveyorName);
+            }
         } catch (Exception e) { // add new Exception for Survey already exists or survey already added
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }

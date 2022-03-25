@@ -16,9 +16,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 class Sysc4806ProjectApplicationTests {
     @Autowired
     private MockMvc mvc;
+    private static final String ACCESS_TOKEN = "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJEZXNoYSIsInJvbGVzIjpbIlJPTEVfU1VSVkVZT1IiXSwiaXNzIjoiU1lTQzQ4MDZfRzIwIiwiZXhwIjoxNjUzMzYwMTExfQ.D_NQnTNton9zCEKWKZV-RzseA-ZRllAyMBvqvq6P4fk";
 
     @Test
     void health() throws Exception {
-        mvc.perform(get("/")).andExpect(status().isOk()).andExpect(content().contentTypeCompatibleWith(MediaType.TEXT_PLAIN));
+        mvc.perform(get("/").header("Authorization", ACCESS_TOKEN)).andExpect(status().isOk()).andExpect(content().contentTypeCompatibleWith(MediaType.TEXT_PLAIN));
     }
 }
