@@ -18,17 +18,17 @@ public class MultipleChoiceQuestion extends TextAnswerable {
     @ElementCollection
     private Set<String> options;
 
-    private MultipleChoiceType type;
+    private MultipleChoiceType displayFormat;
 
-    public MultipleChoiceQuestion(String question, MultipleChoiceType type) {
+    public MultipleChoiceQuestion(String question, MultipleChoiceType displayFormat) {
         super(question);
-        this.type = type;
+        this.displayFormat = displayFormat;
         this.options = new HashSet<>();
     }
 
-    public MultipleChoiceQuestion(String question, MultipleChoiceType type, Set<String> options) {
+    public MultipleChoiceQuestion(String question, MultipleChoiceType displayFormat, Set<String> options) {
         super(question);
-        this.type = type;
+        this.displayFormat = displayFormat;
         this.options = options;
     }
 
@@ -44,12 +44,12 @@ public class MultipleChoiceQuestion extends TextAnswerable {
         return options.remove(option);
     }
 
-    public MultipleChoiceType getType() {
-        return type;
+    public MultipleChoiceType getDisplayFormat() {
+        return displayFormat;
     }
 
-    public void setType(MultipleChoiceType type) {
-        this.type = type;
+    public void setDisplayFormat(MultipleChoiceType displayFormat) {
+        this.displayFormat = displayFormat;
     }
 
     /**
@@ -59,7 +59,7 @@ public class MultipleChoiceQuestion extends TextAnswerable {
     public String toString() {
         return "MultipleChoiceQuestion{" +
                 "options=" + options +
-                ", type=" + type +
+                ", displayFormat=" + displayFormat +
                 '}';
     }
 
@@ -74,11 +74,11 @@ public class MultipleChoiceQuestion extends TextAnswerable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         MultipleChoiceQuestion multi_ques = (MultipleChoiceQuestion) o;
-        return Objects.equals(options, multi_ques.getOptions()) && Objects.equals(type, multi_ques.getType());
+        return Objects.equals(options, multi_ques.getOptions()) && Objects.equals(displayFormat, multi_ques.getDisplayFormat());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(options, type);
+        return Objects.hash(options, displayFormat);
     }
 }

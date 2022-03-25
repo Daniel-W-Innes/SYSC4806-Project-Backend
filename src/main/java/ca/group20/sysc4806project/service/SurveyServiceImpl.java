@@ -42,9 +42,11 @@ public class SurveyServiceImpl implements SurveyService {
     @Override
     public Survey saveSurvey(Survey survey) {
         Survey newSurvey = surveyRepo.save(survey);
-        questionRepo.saveAll(survey.getQuestions());
-        for (Question q : survey.getQuestions()) {
-            q.setSurvey(newSurvey);
+        if (survey.getQuestions() != null){
+            questionRepo.saveAll(survey.getQuestions());
+            for (Question q : survey.getQuestions()) {
+                q.setSurvey(newSurvey);
+            }
         }
         log.info(survey.getName() + " has been saved");
         return newSurvey;
