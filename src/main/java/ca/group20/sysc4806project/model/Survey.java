@@ -34,11 +34,13 @@ public class Survey {
     public Survey(String name) {
         this.name = name;
         this.questions = new ArrayList<>();
+        this.respondents = new ArrayList<>();
     }
 
     public Survey(String name, List<Question> questions) {
         this.name = name;
         this.questions = questions;
+        this.respondents = new ArrayList<>();
     }
 
     public Long getId() {
@@ -88,8 +90,6 @@ public class Survey {
     }
 
     public List<Respondent> getRespondents() { return respondents; }
-
-
 
     public Boolean hasQuestion(Question question) {
         return questions.contains(question);

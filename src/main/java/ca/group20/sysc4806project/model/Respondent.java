@@ -1,7 +1,6 @@
 package ca.group20.sysc4806project.model;
 
 import ca.group20.sysc4806project.model.answer.Answer;
-import ca.group20.sysc4806project.model.question.Question;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;

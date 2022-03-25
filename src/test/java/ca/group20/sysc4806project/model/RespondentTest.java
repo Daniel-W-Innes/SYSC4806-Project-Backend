@@ -22,16 +22,16 @@ class RespondentTest {
 
     @BeforeEach
     void setUp() {
-        survey = new Survey();
+        survey = new Survey("Cool Survey");
         resp_1 = new Respondent(survey);
         resp_2 = new Respondent(survey);
         resp_3 = new Respondent(survey);
         num_quest_0 = new NumberQuestion("1 out of 5?",0,5);
+        survey.addQuestion(num_quest_0);
     }
 
     @AfterEach
     void tearDown() {
-
     }
 
     @Test
