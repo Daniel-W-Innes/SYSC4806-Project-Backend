@@ -1,6 +1,8 @@
 package ca.group20.sysc4806project.model.question;
 
 import ca.group20.sysc4806project.model.Survey;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -12,7 +14,13 @@ import java.util.Objects;
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 @NoArgsConstructor
-public class Question {
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "type")
+@JsonSubTypes({
+        @JsonSubTypes.Type(value = TextAnswerable.class, name = "text"),
+        @JsonSubTypes.Type(value = NumberQuestion.class, name = "number"),
+        @JsonSubTypes.Type(value = MultipleChoiceQuestion.class, name = "multipleChoice")
+})
+public abstract class Question {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -1,4 +1,84 @@
+### Health check
 GET http://localhost:8080/
 Accept: text/plain
+
+### Create surveyor
+POST http://localhost:8080/api/v0/surveyors
+Content-Type: application/json
+
+{
+  "username": "username",
+  "firstName": "firstName",
+  "lastName": "lastName",
+  "hashedPassword": "hashedPassword"
+}
+
+### Create survey
+POST http://localhost:8080/api/v0/surveyors/username/surveys
+Content-Type: application/json
+
+{
+  "name": "name"
+}
+
+### Create survey with questions
+POST http://localhost:8080/api/v0/surveyors/username/surveys
+Content-Type: application/json
+
+{
+  "name": "name",
+  "questions": [
+    {
+      "type": "text",
+      "question": "question"
+    }
+  ]
+}
+
+### Add question
+POST http://localhost:8080/api/v0/surveyors/survey/1/questions
+Content-Type: application/json
+
+{
+  "type": "text",
+  "question": "question"
+}
+
+### Add question num
+POST http://localhost:8080/api/v0/surveyors/survey/1/questions
+Content-Type: application/json
+
+{
+  "type": "number",
+  "question": "question",
+  "max": 2,
+  "min": 1
+}
+
+### Add question MultipleChoice
+POST http://localhost:8080/api/v0/surveyors/survey/1/questions
+Content-Type: application/json
+
+{
+  "type": "multipleChoice",
+  "question": "question",
+  "displayFormat": "MULTI_SELECTION",
+  "options": [
+    "option1"
+  ]
+}
+
+### Add answer
+POST http://localhost:8080/api/v0/respondents/answer
+Content-Type: application/json
+
+{
+  "type": "text",
+  "question": {
+    "type": "text",
+    "id": 1
+  },
+  "answer": "answer"
+}
 
 ###
