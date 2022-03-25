@@ -74,13 +74,13 @@ class SurveyorControllerTest {
     @Test
     @Order(6)
     void getSurveys() throws Exception {
-        mvc.perform(get(CONTROLLER_URL +"/"+ SURVEYOR_NAME + "/surveys").header("Authorization", ACCESS_TOKEN)).andExpect(status().isOk());
+        mvc.perform(get(CONTROLLER_URL +"/"+ SURVEYOR_NAME + "/surveys")).andExpect(status().isOk());
     }
 
     @Test
     @Order(7)
     void getSurvey() throws Exception {
-        mvc.perform(get(CONTROLLER_URL +"/"+ SURVEYOR_NAME + "/survey").header("Authorization", ACCESS_TOKEN)
+        mvc.perform(get(CONTROLLER_URL +"/"+ SURVEYOR_NAME + "/survey")
                 .param("name", "survey_1")).andExpect(status().isOk());
     }
 }
