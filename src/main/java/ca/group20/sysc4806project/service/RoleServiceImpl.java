@@ -13,8 +13,14 @@ public class RoleServiceImpl implements RoleService, CommandLineRunner {
     private final RoleRepo roleRepo;
 
     @Override
-    public Role saveRole(Role role) {
-        return roleRepo.save(role);
+    public void saveRole(Role role) {
+        try {
+            if (roleRepo.findByName(role.getName()) == null) {
+                roleRepo.save(role);
+            }
+        } catch (Exception e) {
+            /* Do nothing since we only want two ROLES: ROLE_SURVEYOR & ROLE_ADMIN */
+        }
     }
 
     @Override
