@@ -20,7 +20,8 @@ public class CustomAuthorizationFilter extends OncePerRequestFilter {
                 && !request.getServletPath().equals("/")
                 && !request.getServletPath().equals("/api/v0/respondents/answer")
                 && !request.getServletPath().equals("/api/v0/surveyors/**/surveys")
-                && !request.getServletPath().equals("/api/v0/surveyors/**/survey")) {
+                && !request.getServletPath().equals("/api/v0/surveyors/**/survey")
+                && !request.getServletPath().equals("/api/v0/surveyors/**/survey**")) {
             TokenUtility.authenticateToken(request, response);
         }
         filterChain.doFilter(request, response);
