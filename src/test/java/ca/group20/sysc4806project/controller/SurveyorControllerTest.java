@@ -22,7 +22,7 @@ class SurveyorControllerTest {
 
     @Autowired
     private MockMvc mvc;
-    private static final String ACCESS_TOKEN = "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJEZXNoYSIsInJvbGVzIjpbIlJPTEVfU1VSVkVZT1IiXSwiaXNzIjoiU1lTQzQ4MDZfRzIwIiwiZXhwIjoxNjUzMzYwMTExfQ.D_NQnTNton9zCEKWKZV-RzseA-ZRllAyMBvqvq6P4fk";
+    private static final String ACCESS_TOKEN = "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJEZXNoYSIsInJvbGVzIjpbIlJPTEVfU1VSVkVZT1IiXSwiaXNzIjoiU1lTQzQ4MDZfRzIwIn0.1Oua12F5PVRqFgN8XL0Lq5QgJfUZt91HKKdmME4KYAo";
     private String test_surveyor, survey_with_questions, text_question, number_question, multiple_choice_question;
 
     @BeforeEach
