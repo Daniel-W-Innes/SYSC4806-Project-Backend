@@ -1,5 +1,6 @@
 package ca.group20.sysc4806project.model.answer;
 
+import ca.group20.sysc4806project.model.Respondent;
 import ca.group20.sysc4806project.model.question.NumberQuestion;
 import lombok.NoArgsConstructor;
 

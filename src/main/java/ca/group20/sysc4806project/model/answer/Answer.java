@@ -1,6 +1,7 @@
 package ca.group20.sysc4806project.model.answer;
 
 import ca.group20.sysc4806project.model.Respondent;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import lombok.NoArgsConstructor;
@@ -26,6 +27,7 @@ public abstract class Answer {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JsonBackReference
     private Respondent respondent;
 
     public Long getId() {

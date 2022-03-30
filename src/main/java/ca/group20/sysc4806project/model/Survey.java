@@ -2,6 +2,7 @@ package ca.group20.sysc4806project.model;
 
 import ca.group20.sysc4806project.model.answer.Answer;
 import ca.group20.sysc4806project.model.question.Question;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -29,6 +30,7 @@ public class Survey {
     private List<Question> questions;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "survey")
+    @JsonManagedReference
     private List<Respondent> respondents;
 
     public Survey(String name) {

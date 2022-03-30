@@ -3,6 +3,7 @@ package ca.group20.sysc4806project.controller;
 import ca.group20.sysc4806project.model.Respondent;
 import ca.group20.sysc4806project.model.Survey;
 import ca.group20.sysc4806project.model.answer.Answer;
+import ca.group20.sysc4806project.model.answer.TextAnswer;
 import ca.group20.sysc4806project.model.question.Question;
 import ca.group20.sysc4806project.repository.RespondentRepo;
 import ca.group20.sysc4806project.service.AnswerService;
@@ -17,6 +18,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.net.URI;
+import java.util.ArrayList;
 
 @RestController
 @RequestMapping("/api/v0/respondents")
@@ -28,14 +30,13 @@ public class RespondentController {
     private final RespondentService respondentService;
     private final SurveyService surveyService;
 
-    @PostMapping("/answer/{respondentID}")
-    public ResponseEntity<?> createAnswer(@PathVariable("respondentID") long respondentID,
-                                        @Valid @RequestBody Answer answer) {
+    @PostMapping("/answer")
+    public ResponseEntity<?> createAnswer(@Valid @RequestBody Answer answer) {
         Answer newAnswer = answerService.saveAnswer(answer);
         URI uri = URI.create(
                 ServletUriComponentsBuilder
                         .fromCurrentContextPath()
-                        .path("/api/v0/respondents")
+                        .path("/api/v0/answer")
                         .toUriString());
         return ResponseEntity.created(uri).body(newAnswer);
     }
@@ -44,31 +45,32 @@ public class RespondentController {
     @PostMapping("/answer/{respondentID}")
     public ResponseEntity<?> createRespondentAnswer(@PathVariable("respondentID") long respondentID,
                                                     @Valid @RequestBody Answer answer) {
-        Answer newAnswer = answerService.saveAnswer(answer);
+
         Respondent respondent = respondentService.findRespondentById(respondentID);
-        respondent.addAnswer(newAnswer);
+        respondent.addAnswer(answer);
+        answer.setRespondent(respondent);
+        Answer newAnswer = answerService.saveAnswer(answer);
         URI uri = URI.create(
                 ServletUriComponentsBuilder
                         .fromCurrentContextPath()
-                        .path("/api/v0/respondentAnswer")
+                        .path("/api/v0/answer")
                         .toUriString());
         return ResponseEntity.created(uri).body(newAnswer);
     }
 
-    @PostMapping("/respondent/{surveyId}")
-    public ResponseEntity<?> createRespondent(@PathVariable("surveyId") long surveyId,
+    @PostMapping("/new_respondent/{surveyId}")
+    public ResponseEntity<?> create(@PathVariable("surveyId") long surveyId,
                                               @Valid @RequestBody Respondent respondent){
         try {
             Survey survey = surveyService.findSurveyById(surveyId);
             respondent.setSurvey(survey);
-            survey.addRespondents(respondent);
-            //Answer newAnswer = answerService.saveAnswer(answer);
-            //respondent.addAnswer(newAnswer);
+            respondent.setAnswers(new ArrayList<>());
             Respondent newRespondent = respondentService.saveRespondent(respondent);
+            survey.addRespondents(newRespondent);
             URI uri = URI.create(
                     ServletUriComponentsBuilder
                             .fromCurrentContextPath()
-                            .path("/api/v0/respondents/" + surveyId)
+                            .path("/api/v0/respondents/new_respondent")
                             .toUriString());
             return ResponseEntity.created(uri).body(newRespondent);
         } catch (Exception e) { // add new Exception for Survey already exists or survey already added

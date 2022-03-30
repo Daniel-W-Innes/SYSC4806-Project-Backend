@@ -1,6 +1,8 @@
 package ca.group20.sysc4806project.model;
 
 import ca.group20.sysc4806project.model.answer.Answer;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -18,11 +20,17 @@ public class Respondent {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JsonBackReference
     private Survey survey;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "respondent")
-    private List<Answer> answers_list = new ArrayList<>();
+    @JsonManagedReference
+    private List<Answer> answers_list;
 
+    public Respondent(String test){
+        answers_list = new ArrayList<>();
+
+    }
     public Survey getSurvey() {
         return survey;
     }
