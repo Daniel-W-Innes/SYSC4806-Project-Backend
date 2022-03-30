@@ -9,6 +9,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -46,14 +47,27 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.cors().and().csrf().disable();
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
-        http.authorizeRequests().antMatchers(HttpMethod.POST, "/api/v0/login", "/api/v0/surveyors", "/api/v0/respondents/answer").permitAll();
-        http.authorizeRequests().antMatchers(HttpMethod.POST, "/api/v0/surveyors/**").hasAnyAuthority("ROLE_SURVEYOR", "ROLE_ADMIN");
-        http.authorizeRequests().antMatchers(HttpMethod.GET, "/", "/api/v0/surveyors/**/surveys", "/api/v0/surveyors/**/survey").permitAll();
-        http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/v0/surveyors/**").hasAnyAuthority("ROLE_SURVEYOR", "ROLE_ADMIN");
-        http.authorizeRequests().anyRequest().authenticated();
+        http
+                .authorizeRequests()
+                .antMatchers("/api/v0/surveyors/**").hasAnyAuthority("ROLE_SURVEYOR", "ROLE_ADMIN")
+                .anyRequest().authenticated()
+                .and()
+                .addFilter(customAuthenticationFilter)
+                .addFilterAfter(new CustomAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);
+    }
 
-        http.addFilter(customAuthenticationFilter);
-        http.addFilterAfter(new CustomAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);
+    @Override
+    public void configure(WebSecurity web) throws Exception {
+        web.ignoring().antMatchers(
+                HttpMethod.POST,
+                "/api/v0/surveyors",
+                "/api/v0/respondents/answer");
+        web.ignoring().antMatchers(
+                HttpMethod.GET,
+                "/",
+                "/api/v0/surveyors/**/surveys",
+                "/api/v0/surveyors/**/survey",
+                "/api/v0/surveyors/**/survey**");
     }
 
     @Bean
