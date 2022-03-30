@@ -19,12 +19,13 @@ public class RespondentControllerTest {
     @Autowired
     private MockMvc mvc;
 
-    private String text_answer, number_answer;
+    private String text_answer, number_answer,respondent_test;
 
     @BeforeEach
     void setUp() {
         text_answer = "{\"type\":\"text\",\"question\":{\"type\": \"text\",\"id\": 1},\"answer\": \"answer\"}";
         number_answer = "{\"type\":\"number\",\"question\":{\"type\": \"number\",\"id\": 2},\"answer\": 1}";
+        respondent_test = "{\"survey\":\"1\"}";
     }
 
     @Test
@@ -36,5 +37,11 @@ public class RespondentControllerTest {
     void addNumberAnswer() throws Exception {
         mvc.perform(post(CONTROLLER_URL + "/answer")
                 .contentType(MediaType.APPLICATION_JSON).content(number_answer)).andExpect(status().isCreated());
+    }
+
+    //@Test
+    void addRespondent() throws Exception {
+        mvc.perform(post(CONTROLLER_URL + "/respondentAnswer/")
+                .contentType(MediaType.APPLICATION_JSON).content(respondent_test)).andExpect(status().isCreated());
     }
 }

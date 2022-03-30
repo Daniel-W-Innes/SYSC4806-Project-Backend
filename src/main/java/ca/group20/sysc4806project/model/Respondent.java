@@ -40,7 +40,6 @@ public class Respondent {
         return id;
     }
 
-
     public void setSurvey(Survey survey) {
         this.survey = survey;
     }
