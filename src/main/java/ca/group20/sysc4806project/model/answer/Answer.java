@@ -1,5 +1,6 @@
 package ca.group20.sysc4806project.model.answer;
 
+import ca.group20.sysc4806project.model.Respondent;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import lombok.NoArgsConstructor;
@@ -24,8 +25,19 @@ public abstract class Answer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Respondent respondent;
+
     public Long getId() {
         return id;
+    }
+
+    public Respondent getRespondent() {
+        return respondent;
+    }
+
+    public void setRespondent(Respondent respondent) {
+        this.respondent = respondent;
     }
 
     public abstract Long getQuestionId();

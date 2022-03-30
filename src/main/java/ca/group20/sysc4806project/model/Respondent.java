@@ -20,7 +20,7 @@ public class Respondent {
     @ManyToOne(fetch = FetchType.LAZY)
     private Survey survey;
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "respondent")
     private List<Answer> answers_list;
 
     public Respondent(Survey survey) {
