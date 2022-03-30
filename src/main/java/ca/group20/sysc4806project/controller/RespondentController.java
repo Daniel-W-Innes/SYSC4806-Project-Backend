@@ -53,7 +53,7 @@ public class RespondentController {
         URI uri = URI.create(
                 ServletUriComponentsBuilder
                         .fromCurrentContextPath()
-                        .path("/api/v0/respondents")
+                        .path("/api/v0/respondents/answer/" + respondentID)
                         .toUriString());
         return ResponseEntity.created(uri).body(newAnswer);
     }
@@ -70,7 +70,7 @@ public class RespondentController {
             URI uri = URI.create(
                     ServletUriComponentsBuilder
                             .fromCurrentContextPath()
-                            .path("/api/v0/respondents/new_respondent")
+                            .path("/api/v0/respondents/new_respondent/"+surveyId)
                             .toUriString());
             return ResponseEntity.created(uri).body(newRespondent);
         } catch (Exception e) { // add new Exception for Survey already exists or survey already added
