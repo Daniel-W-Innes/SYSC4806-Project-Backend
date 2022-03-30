@@ -25,23 +25,26 @@ public class RespondentControllerTest {
     void setUp() {
         text_answer = "{\"type\":\"text\",\"question\":{\"type\": \"text\",\"id\": 1},\"answer\": \"answer\"}";
         number_answer = "{\"type\":\"number\",\"question\":{\"type\": \"number\",\"id\": 2},\"answer\": 1}";
-        respondent_test = "{\"survey\":\"1\"}";
+        respondent_test = "{}";
     }
 
     @Test
+    @Order(2)
     void addTextAnswer() throws Exception {
-        mvc.perform(post(CONTROLLER_URL + "/answer")
+        mvc.perform(post(CONTROLLER_URL + "/answer/1")
                 .contentType(MediaType.APPLICATION_JSON).content(text_answer)).andExpect(status().isCreated());
     }
     @Test
+    @Order(3)
     void addNumberAnswer() throws Exception {
-        mvc.perform(post(CONTROLLER_URL + "/answer")
+        mvc.perform(post(CONTROLLER_URL + "/answer/1")
                 .contentType(MediaType.APPLICATION_JSON).content(number_answer)).andExpect(status().isCreated());
     }
 
-    //@Test
+    @Test
+    @Order(1)
     void addRespondent() throws Exception {
-        mvc.perform(post(CONTROLLER_URL + "/respondentAnswer/")
+        mvc.perform(post(CONTROLLER_URL + "/respondent/1")
                 .contentType(MediaType.APPLICATION_JSON).content(respondent_test)).andExpect(status().isCreated());
     }
 }

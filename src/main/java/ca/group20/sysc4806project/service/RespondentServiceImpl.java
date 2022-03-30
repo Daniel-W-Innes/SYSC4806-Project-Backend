@@ -1,6 +1,7 @@
 package ca.group20.sysc4806project.service;
 
 import ca.group20.sysc4806project.model.Respondent;
+import ca.group20.sysc4806project.model.Survey;
 import ca.group20.sysc4806project.repository.RespondentRepo;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -26,5 +27,11 @@ public class RespondentServiceImpl implements RespondentService{
         Respondent newRespondent = respondentRepo.save(respondent);
         log.info(respondent.getId() + " has been saved");
         return newRespondent;
+    }
+
+    @Override
+    public Respondent findRespondentById(long respondentId) {
+        log.info("Fetching Survey " + respondentId);
+        return respondentRepo.findById(respondentId);
     }
 }

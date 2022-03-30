@@ -4,6 +4,7 @@ import ca.group20.sysc4806project.model.Respondent;
 import ca.group20.sysc4806project.model.Survey;
 import ca.group20.sysc4806project.model.answer.Answer;
 import ca.group20.sysc4806project.model.question.Question;
+import ca.group20.sysc4806project.repository.RespondentRepo;
 import ca.group20.sysc4806project.service.AnswerService;
 import ca.group20.sysc4806project.service.RespondentService;
 import ca.group20.sysc4806project.service.SurveyService;
@@ -27,8 +28,9 @@ public class RespondentController {
     private final RespondentService respondentService;
     private final SurveyService surveyService;
 
-    @PostMapping("/answer")
-    public ResponseEntity<?> createAnswer(@Valid @RequestBody Answer answer) {
+    @PostMapping("/answer/{respondentID}")
+    public ResponseEntity<?> createAnswer(@PathVariable("respondentID") long respondentID,
+                                        @Valid @RequestBody Answer answer) {
         Answer newAnswer = answerService.saveAnswer(answer);
         URI uri = URI.create(
                 ServletUriComponentsBuilder
@@ -38,7 +40,22 @@ public class RespondentController {
         return ResponseEntity.created(uri).body(newAnswer);
     }
 
-    @PostMapping("/respondentAnswer/{surveyId}")
+
+    @PostMapping("/answer/{respondentID}")
+    public ResponseEntity<?> createRespondentAnswer(@PathVariable("respondentID") long respondentID,
+                                                    @Valid @RequestBody Answer answer) {
+        Answer newAnswer = answerService.saveAnswer(answer);
+        Respondent respondent = respondentService.findRespondentById(respondentID);
+        respondent.addAnswer(newAnswer);
+        URI uri = URI.create(
+                ServletUriComponentsBuilder
+                        .fromCurrentContextPath()
+                        .path("/api/v0/respondentAnswer")
+                        .toUriString());
+        return ResponseEntity.created(uri).body(newAnswer);
+    }
+
+    @PostMapping("/respondent/{surveyId}")
     public ResponseEntity<?> createRespondent(@PathVariable("surveyId") long surveyId,
                                               @Valid @RequestBody Respondent respondent){
         try {

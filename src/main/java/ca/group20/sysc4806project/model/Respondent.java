@@ -21,12 +21,7 @@ public class Respondent {
     private Survey survey;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "respondent")
-    private List<Answer> answers_list;
-
-    public Respondent(Survey survey) {
-        this.survey = survey;
-        this.answers_list = new ArrayList<>();
-    }
+    private List<Answer> answers_list = new ArrayList<>();
 
     public Survey getSurvey() {
         return survey;
