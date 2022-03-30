@@ -30,13 +30,13 @@ public class RespondentController {
     private final RespondentService respondentService;
     private final SurveyService surveyService;
 
-    @PostMapping("/answer")
+    @PostMapping("/null")
     public ResponseEntity<?> createAnswer(@Valid @RequestBody Answer answer) {
         Answer newAnswer = answerService.saveAnswer(answer);
         URI uri = URI.create(
                 ServletUriComponentsBuilder
                         .fromCurrentContextPath()
-                        .path("/api/v0/answer")
+                        .path("/api/v0/respondents")
                         .toUriString());
         return ResponseEntity.created(uri).body(newAnswer);
     }
@@ -53,7 +53,7 @@ public class RespondentController {
         URI uri = URI.create(
                 ServletUriComponentsBuilder
                         .fromCurrentContextPath()
-                        .path("/api/v0/answer")
+                        .path("/api/v0/respondents")
                         .toUriString());
         return ResponseEntity.created(uri).body(newAnswer);
     }
