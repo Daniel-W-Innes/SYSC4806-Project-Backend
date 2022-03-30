@@ -1,12 +1,11 @@
 package ca.group20.sysc4806project.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 
 /**
  * Surveyor is a person that owns one or multiple surveys
@@ -27,12 +26,24 @@ public class Surveyor {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "surveyor")
     private List<Survey> surveys;
 
+    @ManyToMany(fetch = FetchType.EAGER)
+    private Collection<Role> roles = new ArrayList<>();
+
     public Surveyor(String username, String firstName, String lastName, String hashedPassword) {
         this.username = username;
         this.firstName = firstName;
         this.lastName = lastName;
         this.hashedPassword = hashedPassword;
         this.surveys = new ArrayList<>();
+        this.roles = new ArrayList<>();
+    }
+
+    public Collection<Role> getRoles() {
+        return roles;
+    }
+
+    public void addRole(Role role) {
+        this.roles.add(role);
     }
 
     public Long getId() {
@@ -63,10 +74,12 @@ public class Surveyor {
         this.lastName = lastName;
     }
 
+    @JsonIgnore
     public String getHashedPassword() {
         return hashedPassword;
     }
 
+    @JsonProperty
     public void setHashedPassword(String hashedPassword) {
         this.hashedPassword = hashedPassword;
     }
