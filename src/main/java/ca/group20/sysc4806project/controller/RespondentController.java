@@ -58,7 +58,7 @@ public class RespondentController {
         return ResponseEntity.created(uri).body(newAnswer);
     }
 
-    @PostMapping("/new_respondent/{surveyId}")
+    @PostMapping("/{surveyId}")
     public ResponseEntity<?> create(@PathVariable("surveyId") long surveyId,
                                               @Valid @RequestBody Respondent respondent){
         try {

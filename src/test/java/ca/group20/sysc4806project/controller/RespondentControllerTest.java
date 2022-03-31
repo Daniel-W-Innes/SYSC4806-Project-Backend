@@ -20,7 +20,6 @@ public class RespondentControllerTest {
 
     @Autowired
     private MockMvc mvc;
-    private static final String ACCESS_TOKEN = "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJEZXNoYSIsInJvbGVzIjpbIlJPTEVfU1VSVkVZT1IiXSwiaXNzIjoiU1lTQzQ4MDZfRzIwIn0.1Oua12F5PVRqFgN8XL0Lq5QgJfUZt91HKKdmME4KYAo";
     private String text_answer, number_answer,respondent_test;
 
     @BeforeEach
@@ -33,20 +32,20 @@ public class RespondentControllerTest {
     @Test
     @Order(2)
     void addTextAnswer() throws Exception {
-        mvc.perform(post(CONTROLLER_URL + "/answer/1").header("Authorization", ACCESS_TOKEN)
+        mvc.perform(post(CONTROLLER_URL + "/answer/1")
                 .contentType(MediaType.APPLICATION_JSON).content(text_answer)).andExpect(status().isCreated());
     }
     @Test
     @Order(3)
     void addNumberAnswer() throws Exception {
-        mvc.perform(post(CONTROLLER_URL + "/answer/1").header("Authorization", ACCESS_TOKEN)
+        mvc.perform(post(CONTROLLER_URL + "/answer/1")
                 .contentType(MediaType.APPLICATION_JSON).content(number_answer)).andExpect(status().isCreated());
     }
 
     @Test
     @Order(1)
     void addRespondent() throws Exception {
-        mvc.perform(post(CONTROLLER_URL + "/new_respondent/1").header("Authorization", ACCESS_TOKEN)
+        mvc.perform(post(CONTROLLER_URL + "/1")
                 .contentType(MediaType.APPLICATION_JSON).content(respondent_test)).andExpect(status().isCreated());
     }
 }
