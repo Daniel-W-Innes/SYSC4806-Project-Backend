@@ -30,18 +30,6 @@ public class RespondentController {
     private final RespondentService respondentService;
     private final SurveyService surveyService;
 
-    @PostMapping("/null")
-    public ResponseEntity<?> createAnswer(@Valid @RequestBody Answer answer) {
-        Answer newAnswer = answerService.saveAnswer(answer);
-        URI uri = URI.create(
-                ServletUriComponentsBuilder
-                        .fromCurrentContextPath()
-                        .path("/api/v0/respondents")
-                        .toUriString());
-        return ResponseEntity.created(uri).body(newAnswer);
-    }
-
-
     @PostMapping("/answer/{respondentID}")
     public ResponseEntity<?> createRespondentAnswer(@PathVariable("respondentID") long respondentID,
                                                     @Valid @RequestBody Answer answer) {
@@ -59,10 +47,10 @@ public class RespondentController {
     }
 
     @PostMapping("/{surveyId}")
-    public ResponseEntity<?> create(@PathVariable("surveyId") long surveyId,
-                                              @Valid @RequestBody Respondent respondent){
+    public ResponseEntity<?> create(@PathVariable("surveyId") long surveyId){
         try {
             Survey survey = surveyService.findSurveyById(surveyId);
+            Respondent respondent = new Respondent();
             respondent.setSurvey(survey);
             respondent.setAnswers(new ArrayList<>());
             Respondent newRespondent = respondentService.saveRespondent(respondent);
