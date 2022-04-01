@@ -68,7 +68,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 "/",
                 "/api/v0/surveyors/**/surveys",
                 "/api/v0/surveyors/**/survey",
-                "/api/v0/surveyors/**/survey**");
+                "/api/v0/surveyors/**/survey**",
+                "/api/v0/respondents/**");
     }
 
     @Bean

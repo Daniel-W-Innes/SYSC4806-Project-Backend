@@ -67,4 +67,23 @@ public class RespondentController {
     }
 
 
+    /**
+     * Using a given surveyor's name and a survey name, return the survey with matching name and surveyor name
+     *
+     * @param id         The name of the survey as a string
+     * @return a survey
+     */
+    @GetMapping("/")
+    public ResponseEntity<?> getSurvey(@RequestParam Long id) {
+        try {
+            Survey survey = surveyService.findSurveyById(id);
+            if (survey != null) {
+                return ResponseEntity.status(HttpStatus.OK).body(survey);
+            } else {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No Survey with that ID found");
+            }
+        } catch (Exception e) { // add new Exception for Survey already exists or survey already added
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
+    }
 }
