@@ -55,6 +55,10 @@ public abstract class Question {
         this.survey = survey;
     }
 
+    public Survey getSurvey() {
+        return survey;
+    }
+
     /**
      * Converts Object to string
      */

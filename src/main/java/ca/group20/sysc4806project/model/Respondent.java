@@ -59,6 +59,14 @@ public class Respondent {
         answers_list.add(answer);
     }
 
+    public List<Answer> getAnswersToQuestion(long questionId) {
+        List<Answer> answers = new ArrayList<Answer>();
+        for(Answer a : answers_list) {
+            if(a.getQuestionId() == questionId) answers.add(a);
+        }
+        return answers;
+    }
+
     public Boolean compareAnswer(Answer answer){
         for(Answer resp_answer : answers_list){
             if (Objects.equals(resp_answer.getQuestionId(), answer.getQuestionId())){

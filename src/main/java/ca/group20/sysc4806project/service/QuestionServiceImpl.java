@@ -1,5 +1,6 @@
 package ca.group20.sysc4806project.service;
 
+import ca.group20.sysc4806project.model.Survey;
 import ca.group20.sysc4806project.model.question.Question;
 import ca.group20.sysc4806project.repository.QuestionRepo;
 import lombok.RequiredArgsConstructor;
@@ -14,6 +15,12 @@ import javax.transaction.Transactional;
 @Slf4j
 public class QuestionServiceImpl implements QuestionService {
     private final QuestionRepo questionRepo;
+
+    @Override
+    public Question findQuestionById(long questionId) {
+        log.info("Fetching Question " + questionId);
+        return questionRepo.findById(questionId);
+    }
 
     /**
      * Adds a new question to the database

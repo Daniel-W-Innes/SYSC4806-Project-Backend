@@ -2,8 +2,10 @@ package ca.group20.sysc4806project.controller;
 
 import ca.group20.sysc4806project.exception.InvalidRoleException;
 import ca.group20.sysc4806project.exception.SurveyorAlreadyExistsException;
+import ca.group20.sysc4806project.model.Respondent;
 import ca.group20.sysc4806project.model.Survey;
 import ca.group20.sysc4806project.model.Surveyor;
+import ca.group20.sysc4806project.model.answer.Answer;
 import ca.group20.sysc4806project.model.question.Question;
 import ca.group20.sysc4806project.service.QuestionService;
 import ca.group20.sysc4806project.service.SurveyService;
@@ -17,6 +19,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -161,6 +164,59 @@ public class SurveyorController {
                 return ResponseEntity.status(HttpStatus.OK).body(surveyor.getSurvey(name));
             } else {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No Surveyor found with username: " + surveyorName);
+            }
+        } catch (Exception e) { // add new Exception for Survey already exists or survey already added
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
+    }
+
+    /**
+     * Using a survey ID, return all answers to all questions of that survey
+     * useful if we want to arrange answers by respondent
+     *
+     * @param surveyId the ID of the survey we want the answers from
+     * @return list of lists: each inner list contains all answers for one respondent of the survey
+     */
+    @GetMapping("/survey/{surveyId}")
+    public ResponseEntity<?> getAnswersForSurvey(@PathVariable("surveyId") int surveyId) {
+        try {
+            Survey survey = surveyService.findSurveyById(surveyId);
+            if (survey != null) {
+                List<Respondent> respondents = survey.getRespondents();
+                List<List<Answer>> answers = new ArrayList<List<Answer>>();
+                for(Respondent r : respondents) {
+                    answers.add(r.getAnswers());
+                }
+                return ResponseEntity.status(HttpStatus.OK).body(answers);
+            } else {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No survey found with ID: " + surveyId);
+            }
+        } catch (Exception e) { // add new Exception for Survey already exists or survey already added
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
+    }
+
+    /**
+     * Using a question ID, return all answers to that question
+     *
+     * @param questionId the question we want the answers from
+     * @return
+     */
+    @GetMapping("/question/{questionId}")
+    public ResponseEntity<?> getAnswersForQuestion(@PathVariable("questionId") int questionId) {
+        try {
+            Question question = questionService.findQuestionById(questionId);
+
+            if (question != null) {
+                Survey survey = question.getSurvey();
+                List<Respondent> respondents = survey.getRespondents();
+                List<Answer> answers = new ArrayList<>();
+                for(Respondent r : respondents) {
+                    answers.addAll(r.getAnswersToQuestion(question.getId()));
+                }
+                return ResponseEntity.status(HttpStatus.OK).body(answers);
+            } else {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No question found with ID: " + questionId);
             }
         } catch (Exception e) { // add new Exception for Survey already exists or survey already added
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
