@@ -1,6 +1,7 @@
 package ca.group20.sysc4806project.model.question;
 
 import ca.group20.sysc4806project.model.Survey;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import lombok.NoArgsConstructor;
@@ -27,6 +28,7 @@ public abstract class Question {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JsonBackReference
     private Survey survey;
 
     private String question;
@@ -53,6 +55,10 @@ public abstract class Question {
 
     public void setSurvey(Survey survey) {
         this.survey = survey;
+    }
+
+    public Survey getSurvey() {
+        return survey;
     }
 
     /**
