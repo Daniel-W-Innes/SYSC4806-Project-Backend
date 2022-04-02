@@ -12,14 +12,15 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+@TestClassOrder(ClassOrderer.OrderAnnotation.class)
 @Order(2)
 public class RespondentControllerTest {
     private final static String CONTROLLER_URL = "/api/v0/respondents";
 
     @Autowired
     private MockMvc mvc;
-
-    private String text_answer, number_answer;
+    private String text_answer, number_answer,respondent_test;
 
     @BeforeEach
     void setUp() {
@@ -28,13 +29,21 @@ public class RespondentControllerTest {
     }
 
     @Test
+    @Order(2)
     void addTextAnswer() throws Exception {
-        mvc.perform(post(CONTROLLER_URL + "/answer")
+        mvc.perform(post(CONTROLLER_URL + "/answer/1")
                 .contentType(MediaType.APPLICATION_JSON).content(text_answer)).andExpect(status().isCreated());
     }
     @Test
+    @Order(3)
     void addNumberAnswer() throws Exception {
-        mvc.perform(post(CONTROLLER_URL + "/answer")
+        mvc.perform(post(CONTROLLER_URL + "/answer/1")
                 .contentType(MediaType.APPLICATION_JSON).content(number_answer)).andExpect(status().isCreated());
+    }
+
+    @Test
+    @Order(1)
+    void addRespondent() throws Exception {
+        mvc.perform(post(CONTROLLER_URL + "/1")).andExpect(status().isCreated());
     }
 }

@@ -1,6 +1,8 @@
 package ca.group20.sysc4806project.model;
 
+import ca.group20.sysc4806project.model.answer.Answer;
 import ca.group20.sysc4806project.model.question.Question;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -27,14 +29,20 @@ public class Survey {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "survey")
     private List<Question> questions;
 
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "survey")
+    @JsonManagedReference
+    private List<Respondent> respondents;
+
     public Survey(String name) {
         this.name = name;
         this.questions = new ArrayList<>();
+        this.respondents = new ArrayList<>();
     }
 
     public Survey(String name, List<Question> questions) {
         this.name = name;
         this.questions = questions;
+        this.respondents = new ArrayList<>();
     }
 
     public Long getId() {
@@ -57,6 +65,20 @@ public class Survey {
         return surveyor.getId();
     }
 
+    public boolean addRespondents(Respondent resp) { return respondents.add(resp); }
+
+    public boolean removeRespondent(Respondent resp){ return respondents.remove(resp); }
+
+    public List<Respondent> sameAnswerRespondentList(Answer ans){
+        List<Respondent> same_answer = new ArrayList<>();
+        for(Respondent resp : respondents){
+            if(resp.compareAnswer(ans)){
+                same_answer.add(resp);
+            }
+        }
+        return same_answer;
+    }
+
     public boolean addQuestion(Question q) {
         return questions.add(q);
     }
@@ -68,6 +90,8 @@ public class Survey {
     public List<Question> getQuestions() {
         return questions;
     }
+
+    public List<Respondent> getRespondents() { return respondents; }
 
     public Boolean hasQuestion(Question question) {
         return questions.contains(question);
