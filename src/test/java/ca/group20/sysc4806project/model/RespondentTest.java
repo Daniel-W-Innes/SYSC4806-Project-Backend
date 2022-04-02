@@ -23,9 +23,9 @@ class RespondentTest {
     @BeforeEach
     void setUp() {
         survey = new Survey("Cool Survey");
-        resp_1 = new Respondent("h");
-        resp_2 = new Respondent("h");
-        resp_3 = new Respondent("h");
+        resp_1 = new Respondent();
+        resp_2 = new Respondent();
+        resp_3 = new Respondent();
         num_quest_0 = new NumberQuestion("1 out of 5?",0,5);
         survey.addQuestion(num_quest_0);
     }

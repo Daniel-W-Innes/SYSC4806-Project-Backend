@@ -26,7 +26,6 @@ public class RespondentControllerTest {
     void setUp() {
         text_answer = "{\"type\":\"text\",\"question\":{\"type\": \"text\",\"id\": 1},\"answer\": \"answer\"}";
         number_answer = "{\"type\":\"number\",\"question\":{\"type\": \"number\",\"id\": 2},\"answer\": 1}";
-        respondent_test = "{\"test\":\"hi\"}";
     }
 
     @Test
@@ -45,7 +44,6 @@ public class RespondentControllerTest {
     @Test
     @Order(1)
     void addRespondent() throws Exception {
-        mvc.perform(post(CONTROLLER_URL + "/1")
-                .contentType(MediaType.APPLICATION_JSON).content(respondent_test)).andExpect(status().isCreated());
+        mvc.perform(post(CONTROLLER_URL + "/1")).andExpect(status().isCreated());
     }
 }

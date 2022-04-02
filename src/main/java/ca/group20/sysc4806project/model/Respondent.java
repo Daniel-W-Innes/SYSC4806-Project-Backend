@@ -12,7 +12,6 @@ import java.util.Objects;
 
 
 @Entity
-@NoArgsConstructor
 public class Respondent {
 
     @Id
@@ -27,10 +26,10 @@ public class Respondent {
     @JsonManagedReference
     private List<Answer> answers_list;
 
-    public Respondent(String test){
+    public Respondent(){
         answers_list = new ArrayList<>();
-
     }
+
     public Survey getSurvey() {
         return survey;
     }
