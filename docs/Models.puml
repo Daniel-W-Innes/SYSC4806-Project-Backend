@@ -7,6 +7,7 @@ class Surveyor{
     - firstName : String
     - lastName : String
     - hashedPassword : String
+    - surveys : List<Survey>
     - roles : Collection<Role>
     + Surveyor(username : String, firstName : String, lastName : String, hashedPassword : String) : Surveyor
     + addRole(role : Role) : void
@@ -34,8 +35,8 @@ class Survey{
     - name : String
     - respondents: List<Respondent>
     - questions : List<Question>
-    - surveys : List<Survey>
     + Survey(name : String): Survey
+    + Survey(name : String, questions : List<Question>) : Survey
     + getId() : Long
     + getName() : String
     + setName(name : String) : void
@@ -43,13 +44,11 @@ class Survey{
     + getSurveyorId() : Long
     + addRespondent(resp: Respondent): boolean
     + getRespondents(): List<Respondent>
-    + removeRespondent(resp: Respondent): boolean
+    + sameAnswerRespondentList(ans : Answer) : List<Respondent>
     + getQuestions() : List<Question>
     + addQuestion(q : Question) : boolean
     + removeQuestion(q : Question) : boolean
-    + getSurveys() : List<Survey>
-    + getSurvey(name : String) : Optional<Survey>
-    + addSurvey(s : Survey) : boolean
+    + hasQuestion(question : Question) : Boolean
     + toString() : String
     + equals(o : Object) : boolean
     + hashCode() : int
@@ -57,12 +56,17 @@ class Survey{
 
 class Respondent{
     - id : Long
+    - survey: Survey
     - answerList : List<Answer>
     + Respondent(): Respondent
+    + getSurvey(): Survey
+    + getAnswers() : List<Answer>
     + getId() : Long
+    + setSurvey(survey : Survey) : void
     + setAnswers(answers: List<Answer>): void
     + addAnswer(answer: Answer): void
     + removeAnswer(answer: Answer): void
+    + getAnswersToQuestion(questionId : long) : List<Answer>
     + compareAnswer(answer: Answer): Boolean
     + toString() : String
     + equals(o : Object) : boolean
@@ -89,6 +93,7 @@ package question{
         + setQuestion(question : String) : void
         + getSurveyId() : Long
         + setSurvey(survey: Survey) : void
+        + getSurvey() : Survey
         + toString() : String
         + equals(o : Object) : boolean
         + hashCode() : int
@@ -111,13 +116,14 @@ package question{
     }
     class MultipleChoiceQuestion extends TextAnswerable{
         - options : Set<String>
-        - type : MultipleChoiceType
-        + MultipleChoiceQuestion(question : String, type : MultipleChoiceType) : MultipleChoiceQuestion
+        - displayFormat : MultipleChoiceType
+        + MultipleChoiceQuestion(question : String, displayFormat : MultipleChoiceType) : MultipleChoiceQuestion
+        + MultipleChoiceQuestion(question : String, displayFormat : MultipleChoiceType, options : Set<String>) : MultipleChoiceQuestion
         + getOptions(): Set<String>
         + addOption(option : String) : boolean
         + removeOption(option : String) : boolean
-        + getType() : MultipleChoiceType
-        + setType(type : MultipleChoiceType) : void
+        + getDisplayFormat() : MultipleChoiceType
+        + setDisplayFormat(displayFormat : MultipleChoiceType) : void
         + toString() : String
         + equals(o : Object) : boolean
         + hashCode() : int
@@ -129,10 +135,10 @@ package question{
 package answer{
     abstract class Answer{
         - id : Long
-        - survey : Survey
+        - respondent : Respondent
         + getId() : Long
-        + getSurveyId() : Long
-        + setSurvey(survey : Survey) : void
+        + getRespondent() : Respondent
+        + setRespondent(respondent : Respondent) : void
         + toString() : String
         + equals(o : Object) : boolean
         + hashCode() : int
@@ -140,6 +146,7 @@ package answer{
     class NumberAnswer extends Answer{
         - answer : int
         - question : NumberQuestion
+        + NumberAnswer(answer : int) : NumberAnswer
         + getAnswer() : int
         + setAnswer(answer : int) : void
         + getQuestionId() : Long
