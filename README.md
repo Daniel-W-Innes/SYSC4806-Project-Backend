@@ -17,11 +17,11 @@ Back-End Deployment: https://sysc4806-survey-monkey.herokuapp.com/ <br/>
 Front-End Repo: https://github.com/Daniel-W-Innes/SYSC4806-Project-Frontend <br/>
 Back-End Repo: https://github.com/Daniel-W-Innes/SYSC4806-Project-Backend <br/>
 
-## Deliverable 2:
-For this deliverable, we have built a basic usable application. The back-end of the application is hosted on **TravisCI** and deployed on **Heroku**. To develop the application, we are using the framework Spring Boot on the back end and React Static for the front end. Note that the code for the front end is here: https://github.com/Daniel-W-Innes/SYSC4806-Project-Frontend
+## Deliverable 3:
+Application is now fully functional and deployed. Every use case was implemented. The back-end of the application is hosted on **TravisCI** and deployed on **Heroku**. To develop the application, we are using the framework Spring Boot on the back end and React Static for the front end.
 
 ### Model
-In this application, we consider that to create surveys, a user must have an account. When the user creates an account, the user becomes a *Surveyor* and can create *Survey* objects. To fill surveys, users do not need accounts, they will be considered as a *Respondent*, but will remain anonymous. Surveys are composed of a list of *Question* objects. The most basic type of questions is long answer question. These are modeled with the *Question* class. *MultipleChoiceQuestion* are questions where the user must pick an option from a list. These can also be used for True or False questions. *NumberQuestion* are questions where the user is asked to pick a number in a range. When users fill surveys, we create *Answer* objects to record their answers. Answers are associated with one particular *Question* and *Survey*. *TextAnswer* are used for long answer questions and multiple choice questions. *NumberAnswer* are used for number questions. Note that one *Question* has as many *Answer* associated to it as the number of people who answer the question.
+In this application, we consider that to create surveys, a user must have an account. When the user creates an account, the user becomes a *Surveyor* and can create *Survey* objects. To fill surveys, users do not need accounts, they will be considered as a *Respondent*, but will remain anonymous. Surveys are composed of a list of *Question* objects. The most basic type of questions is long answer question. These are modeled with the *TextAnswerable* class. *MultipleChoiceQuestion* are questions where the user must pick an option from a list. These can also be used for True or False questions. *NumberQuestion* are questions where the user is asked to pick a number in a range. When users fill surveys, we create *Answer* objects to record their answers. Answers are associated with one particular *Question* and *Survey*. *TextAnswer* are used for long answer questions and multiple choice questions. *NumberAnswer* are used for number questions. Note that one *Question* has as many *Answer* associated to it as the number of people who answer the question.
 
 ![ModelUML](/docs/Models.png)
 
@@ -55,3 +55,10 @@ In this use case, the user can create a new survey and save it to the database. 
 In this use case, we fetch the survey name from the URL and we use the name to fetch the survey questions from the database. The questions are displayed and the user can answer them. The answers are stored in the state of the application (through React) and when the user clicks "SUBMIT SURVEY", the answers are saved into the database.
 
 ![AnswerSurvey](/docs/AnswerSurvey.png)
+
+### Use Case 5: Display survey results
+
+In this use case, the surveyor can view the answers to a survey that they created. Answers to long answer questions are presented as a list. Multiple choice answers are presented with pie charts, and number answers are presented with histograms. Anyone can answer a survey, but only the surveyor who created the survey can view its answers. To view  
+
+![DisplayResults1](/docs/DisplayResults1.PNG)
+![DisplayResults2](/docs/DisplayResults2.PNG)
